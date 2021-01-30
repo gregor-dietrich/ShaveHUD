@@ -1,0 +1,15 @@
+{
+    "author": "TdlQ",
+    "blt_version": 2,
+    "color": "0.52 1 0",
+    "contact": "",
+    "description": "Give the ability to issue orders to your AI teammates and jokers.",
+    "name": "Keepers",
+    "simple_dependencies": {
+        "GoonMod's Custom Waypoints": "http://pd2mods.z77.fr/update/GoonmodCustomWaypoints.zip",
+        "Iter": "http://pd2mods.z77.fr/update/Iter.zip",
+        "No Duplicated Bullets": "http://pd2mods.z77.fr/update/NoDuplicatedBullets.zip"
+    },
+    "simple_update_url": "http://pd2mods.z77.fr/update/Keepers.zip",
+    "version": "0"
+}

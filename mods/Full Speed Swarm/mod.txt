@@ -1,0 +1,10 @@
+{
+    "author": "TdlQ",
+    "blt_version": 2,
+    "color": "0.52 1 0",
+    "contact": "",
+    "description": "Some code optimizations to be able to handle hundreds of responsive cops.",
+    "name": "Full Speed Swarm",
+    "simple_update_url": "http://pd2mods.z77.fr/update/FullSpeedSwarm.zip",
+    "version": "0"
+}

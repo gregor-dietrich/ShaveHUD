@@ -1,0 +1,239 @@
+# ShaveHUD
+Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 different authors.
+
+# Included Mods
+- **Akimbo Firemode Toggle** by Llamageddon
+	- https://modwork.shop/20268
+- **Auto-Discard Parachute** by Snh20
+	- https://modwork.shop/15579
+- **Auto Fire Sound Fix** by Offyerrocker
+	- https://modwork.shop/20403
+- **AutoPickup** by Seven
+	- https://bitbucket.org/pjal3urb/autopickup
+- **Badass Camera** by Snh20
+	- https://modwork.shop/15102
+- **Bag Carrying Tilt Removal** by Seven
+	- https://modwork.shop/16487
+- **Bigger Better Replaced** by Malo
+- **Bot Bullet Collision Fix** by Rhynne
+	- https://modwork.shop/13463
+- **Bullet Dismemberment** by Undeadsewer, updated by test1 & Dr_Newbie
+	- https://modwork.shop/30587
+- **Cheater Kicker** by Sora
+	- https://modwork.shop/21487
+- **Clear Descriptions** by Vectis
+	- https://modwork.shop/19548
+- **Correct Armour Sorting** by lekousin
+	- https://modwork.shop/13585
+- **Counter tase animation restoration** by Sora
+	- https://modwork.shop/20036
+- **Correct Difficulty Enemies** by Ellie
+	- https://modwork.shop/19363
+- **Create Empty Lobby** by Snh20
+	- https://modwork.shop/14791
+- **Crimespree Crash Loss Fix** by Sora
+	- https://modwork.shop/19568
+- **Crimespree Rankspread Filter Fix** by Snh20
+	- https://modwork.shop/19837
+- **Crimespree Phalanx Spawn Limit Fix** by Rokk
+	- https://modwork.shop/20473
+- **Custom Vehicle FOV** by Takku (me)
+	- https://modwork.shop/20640
+- **Deathwish Skull Loot Bag** by Dave The Ripper
+	- https://modwork.shop/13499
+- **Difficulty Check Fallback Fix** by Zdann
+	- https://modwork.shop/28869
+- **Difficulty Screen Animation** by Undeadsewer
+	- https://modwork.shop/20020
+- **Disable Telemetry** by test1
+	- https://modwork.shop/27441
+- **Disable Weapon Preview Rotation** by Offyerrocker
+	- https://modwork.shop/21829
+- **DoubleTap Grenades** by Seven
+	- https://bitbucket.org/pjal3urb/doubletapgrenades
+- **Dozer Sprint Fix** by Schmuddel
+	- https://modwork.shop/19607
+- **DrivingHUD** by ViciousWalrus and Great Big Bushy Beard, rewritten by Kamikaze94
+	- https://modwork.shop/12982
+- **Floating Health Bars** by BangL
+	- https://modwork.shop/20330
+- **Hawk's Complete Soundpack** by Hawk
+	- https://modwork.shop/1529
+- **Hide Buy DLC** by test1
+	- https://modwork.shop/25942
+- **Hidden Content Updates** by Zdann
+	- https://modwork.shop/18476
+- **Improved Offline Functionality** by fragtrane
+	- https://modwork.shop/25511
+- **Instant Cardflip** by Takku (me)
+	- https://modwork.shop/20839
+- **Instant Custody** by Jindetta
+	- https://modwork.shop/17271
+- **Insta-pickup Gage Packages** by Dorpenka
+	- https://modwork.shop/27414
+- **Inventory Count** by Nervatel, updated by Takku (me)
+	- https://modwork.shop/20427
+- **Keep Heist Specific Outfits** by Kuziz
+	- https://modwork.shop/26037
+- **Kick A Friend** by FishTaco
+	- https://modwork.shop/15175
+- **Ladder Improvements** by Offyerrocker
+	- https://modwork.shop/23192
+- **Map-Based Optimizations** by RedFlame
+	- https://modwork.shop/30521
+- **Metal Gear Solid Alert Sound** by Teacher Bun Bun
+	- https://modwork.shop/14660
+- Mira Mod's **Stealth Meter** by HITM4N
+	-  https://modwork.shop/12783
+- **Mod List Lite** by BangL
+- **No Cloaker Camera Movement** by Zdann
+	- https://modwork.shop/24339
+- **No Fade to Black** by Luffy
+	- https://modwork.shop/17257
+- **No Killing Bullet Push** by Zdann
+	- https://modwork.shop/28782
+- **No Red Player Lasers** by Offyerrocker
+	- https://modwork.shop/21990
+- **No Weapon Sway** by Kuziz
+	- https://modwork.shop/13139
+- **Numpad Enter Confirm** by Snh20
+	- https://modwork.shop/14144
+- **Player BloodSplat** by Sora
+	- https://modwork.shop/23178
+- **Press To Mask Up** by Hejoro
+- **Real Ammo** by FishTaco, modified by Kamikaze94
+	- https://modwork.shop/15108
+- **Redundant Card Removal** by Naviaux
+	- https://modwork.shop/16282
+- **Reload Speed Boost Fix** by 81AWﾖi
+	- https://modwork.shop/30555
+- **Remember Gadget State** by Seven
+	- https://bitbucket.org/pjal3urb/persistentgadgets
+- **Returnable Mask Components** by Llamageddon
+	- https://modwork.shop/20271
+- **Set Heist Outfit Logically** by Krimzin
+	- https://modwork.shop/29408
+- **Shield Despawn Timer** by Jindetta
+	- https://modwork.shop/19522
+- **Shortened Gun Names** by Vectis
+	- https://modwork.shop/19369
+- **Shotgun Reload Fix** by Zdann
+	- https://modwork.shop/28937
+- **Show Mask in Outfit Screen** by Zdann
+	- https://modwork.shop/26002
+- **Simple Bipods** by Krimzin
+	- https://modwork.shop/28961
+- **Simple Health Thresholds** by Bedebao, modified by Takku (me)
+	- https://modwork.shop/13357
+- **Skin Hider** by Sora
+	- https://modwork.shop/18129
+- **Skip Blackscreen** by Seven
+	- https://modwork.shop/13511
+- **Stale Lobby Fix** by Snh20
+	- https://modwork.shop/15540
+- **Starring** by Sora
+	- https://modwork.shop/20060
+- **Steam Inventory in Lobby** by Sora
+	- https://modwork.shop/19350
+- **Straight To Main Menu** by Snh20
+	- https://modwork.shop/14789
+- **Third Person Recoil Animations** by Zdann
+	- https://modwork.shop/25769
+- **ToggleInteract** by Seven, modified by Iron Predator and Kamikaze94
+	- https://bitbucket.org/pjal3urb/toggleinteract
+- **Use Ability While Shooting or Driving** by zzorra
+	- https://modwork.shop/22662
+- **WeaponGadgets** by Seven
+	- https://bitbucket.org/pjal3urb/gadgets
+- **WolfHUD** by Kamikaze94
+	- https://github.com/Kamikaze94/WolfHUD
+	- **AdvAssault** (based on HoxHUD P4.1)
+	- **Angled Sight Visualisation** (based on HoxHUD P4.1)
+	- **BurstFire** by Seven
+		- https://bitbucket.org/pjal3urb/burstfire
+	- **CustomHUD** by Seven, modified by Kamikaze94
+		- https://bitbucket.org/pjal3urb/customhud
+		- **Accuracy Plugin** by Seven, modified by Kamikaze94
+		- **KillCounter** by Seven, modified by Kamikaze94
+	- **DamagePopups** (uses **WaypointsManager** by Seven)
+	- **Dynamic Damage Indicator**
+	- **EnemyHealthbar** by Undeadsewer, modified by Kamikaze94
+		- https://modwork.shop/15157
+	- **Equipment Tweaks**
+	- **HudPanelList** by Seven, modified by Kamikaze94
+		- https://bitbucket.org/pjal3urb/hudlist
+	- **No Spam** by Ahab, Seven, AmEyeBlind & money123451, updated by Kamikaze94
+	- **Numeric Suspicion** by friendIyfire, updated by Kamikaze94
+	- **PrePlanManager**
+	- **ProfileMenu**
+	- **Real Weapon Names** by (AD) Jaqueto, updated by Terminator01
+		- https://modwork.shop/15433
+	- **Smaller Menu Tweaks**
+		- **Always show Mod Icons** by Slippai, updated by Kamikaze94
+			- https://modwork.shop/13975
+		- **Slider Values** by Snh20, modified by Kamikaze94
+			- https://modwork.shop/14800
+		- **Show Weapon Names**
+		- **Show Skill Names**
+		- **Skillset Info** by Fooksie
+			- https://modwork.shop/15294
+		- **Increased the maximum chars** of custom Weapon/Mask/Skillset names
+		- **Federal Inventory (Mod Override),** by Nervatel and Luffy, updated by Kamikaze94
+			- **Weapon Icons, Melee Icons and Mask Icons** by Nervatel
+			- **Throwables, Equipment, Armor and Heister Portraits** by Luffy
+	- **TabStats** by friendIyfire
+- **Various Mods** by TdlQ
+	- http://pd2mods.z77.fr
+    - **Alphasort Mods**
+    - **Anticrash**
+    - **Bag Contour**
+    - **Celer**
+    - **Civilian ! Marker for Drop-ins**
+	- **Crew Ability - Pied Piper**
+	- **Crew Ability - Spotter**
+    - **Crewfiles**
+    - **Drag and Drop Inventory**
+    - **Enhanced Hitmarkers**
+    - **Fading Contours**
+    - **Filtered Camera Beeps**
+    - **Fix Crime Spree Concealment Modifier**
+    - **Fixed Mutators**
+    - **Flashing Swan Song**
+	- **Full Speed Swarm**
+	- **GoonMod's Custom Waypoints**
+	- **Iter**
+	- **Keepers**
+    - **Less Inaccurate Weapon Laser**
+    - **Lobby Player Info**
+    - **Lobby Settings**
+    - **Marking**
+	- **Monkeepers**
+    - **More Weapon Stats**
+	- **Moveable Intimidated Cop**
+    - **Mr Dr Fantastic!**
+    - **No Armor Color Grading**
+    - **No Duplicated Bullets**
+    - **No Mutants Allowed**
+	- **Please, Go There**
+    - **QuickKeyboardInput**
+    - **Reload Then Run**
+    - **Saw Helper**
+    - **Simple Mod Updater**
+    - **Search Inventory**
+    - **Switch underbarrel in steelsight**
+
+As you can see from this list, Payday 2 wouldn't be what it is today without the combined efforts of many talented individuals.
+The most important contributors (in alphabetical order) are BangL, FishTaco, friendIyfire, Kamikaze94, Luffy, Offyerrocker, Seven, Snh20, Sora, TdlQ, test1, Undeadsewer and Zdann.
+However, none of them are directly affiliated with this project, so don't bother them about it!
+
+# Localizations
+- **English** by Kamikaze94, modified by me
+- **German** by Kamikaze94, modified by me
+- **Russian** by chrom[K]a, Magic3000 & MEXAHOTABOP
+- **Korean** by Я!zu
+- **Spanish** by papydeath95 & ElReyZero1201
+- **Chinese** by zhongfly & CoolLKK
+- **French** by Elise MRX (La Mule)
+- **Portuguese** by Kazenin (Aldo Raine)
+- **Italian** by LeecanIt
+- **Dutch** by Azoraqua

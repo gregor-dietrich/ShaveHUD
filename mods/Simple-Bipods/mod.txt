@@ -1,0 +1,16 @@
+{
+    "author": "Krimzin",
+    "blt_version": 2,
+    "contact": "https://www.modworkshop.net/mod/28961",
+    "description": "A mod that aims to simplify bipods, allow for greater freedom when deploying them, and make them functionally consistent.",
+    "name": "Simple Bipods",
+    "updates": [
+        {
+            "host": {
+                "meta": "https://github.com/Krimzin/Simple-Bipods/releases/download/second-latest/meta.json"
+            },
+            "identifier": "Simple-Bipods"
+        }
+    ],
+    "version": "0"
+}
