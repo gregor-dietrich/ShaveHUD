@@ -45,7 +45,7 @@
 
 				<group :hook_id="localizationmanager">
 					<post :script_path="AdvAssault.lua"/>
-					<post :script_path="ClearDescriptions.lua"/>
+					<post :script_path="Scripts.lua"/>
 				</group>
 
 				<group :hook_id="menumanager">
