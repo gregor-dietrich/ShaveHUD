@@ -6,6 +6,12 @@
         "patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
     },
 	{
+        "ident": "shavehud_beta",
+        "hash": "317cffc39197fe2699df332766de5aae9ab83d75451763c226fa9f2a23f1953f",
+        "download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD_beta.zip",
+        "patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
+    },
+	{
         "ident": "shavehud_assets",
         "hash": "f55be8fc3b3d46d88fea8986121bc069d0cd0adddf4ba4e5c17a99013ae7a9e0",
         "download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD_Assets.zip",
