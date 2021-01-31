@@ -218,8 +218,10 @@
 				</group>
 
 				<group :hook_id="enemies/">
+					<post :hook_id="tank/logics/tankcoplogicattack" :script_path="FixTheGame.lua"/>
+					
 					<group :hook_id="cop/">
-						<post :hook_id="copinventory" :script_path="Scripts.lua"/>
+						<post :hook_id="copinventory" :script_path="ShieldDespawnTimer.lua"/>
 						<post :hook_id="copmovement" :script_path="BulletDecapitations.lua"/>
 
 						<group :hook_id="copdamage">
@@ -229,10 +231,6 @@
 							<post :script_path="TabStats.lua"/>
 							<post :script_path="BulletDecapitations.lua"/>
 						</group>
-					</group>
-
-					<group :hook_id="tank/logics/tankcoplogicattack">
-						<post :script_path="FixTheGame.lua"/>
 					</group>
 				</group>
 

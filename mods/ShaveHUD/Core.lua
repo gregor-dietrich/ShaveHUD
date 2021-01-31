@@ -1428,7 +1428,7 @@ if not _G.ShaveHUD then
 				or string_id == "bm_w_contraband" and "Little Friend 7.62"
 				or string_id == "bm_w_spas12"   and "Predator 12G"
 				or string_id == "bm_w_b682"     and "Joceline O/U 12G"
-				or string_id == "bm_w_r870"     and "Reinfield 880"
+				or string_id == "bm_w_r870"     and "Reinfeld 880"
 				or string_id == "bm_w_saiga"    and "IZHMA 12G"
 				or string_id == "bm_w_huntsman" and "Mosconi 12G"
 				or string_id == "bm_w_benelli"  and "M1014"

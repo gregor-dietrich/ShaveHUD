@@ -14,7 +14,7 @@
 	"shavehud_dialog_requires_superblt_desc_long" : "Для работы WoldHUD требуется SupeBLT.\nSuperBLT - модернизированная версия ИДЕ с рядом существенных улучшений. \nОн полностью совместим с обычными BLT модами.\n\nВы можете найти дополнительную информацию и инструкцию по установке здесь: \n$URL",
 	"shavehud_dialog_requires_superblt_desc_short" : "ShaveHUD больше не совместим с обычным BLT.\nДля дальнейшего использования мода, пожалуйста, обновитесь до SuperBLT.\nВы можете найти SuperBLT здесь: '$URL'.",
 	"shavehud_dialog_update_install_folder_title" : "[ShaveHUD] Автообновления скомпроментированы!",
-	"shavehud_dialog_update_install_folder_desc" : "Для автоматических обновлений установочная папка ShaveHUD \nдолжна называться 'mods/ShaveHUD-master/'. \n(В настоящее время это 'mods/$FOLDER/')",
+	"shavehud_dialog_update_install_folder_desc" : "Для автоматических обновлений установочная папка ShaveHUD \nдолжна называться 'mods/ShaveHUD/'. \n(В настоящее время это 'mods/$FOLDER/')",
 	"shavehud_notification_disabled_override_title" : "ShaveHUD: $NAME в настоящее время отключен.",
 	"shavehud_notification_disabled_override_desc" : "Если вы передумали, нажмите сюда, чтобы спросить потом.",
 	"shavehud_notification_restart_override_title" : "ShaveHUD: $NAME готов к установке.",

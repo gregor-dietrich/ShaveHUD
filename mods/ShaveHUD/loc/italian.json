@@ -14,7 +14,7 @@
     "shavehud_dialog_requires_superblt_desc_long" : "ShaveHUD ha bisogno di SuperBLT per funzionare.\nSuperBLT è un fork del Hook caricatore di mod conosciuto come BLT per PAYDAY 2, con vari miglioramenti. \nÈ completamente retro compatibile con le mod per BLT regolare.\n\nPuoi trovare informazioni aggiuntive e le istruzioni per l'installazione qui: \n$URL",
     "shavehud_dialog_requires_superblt_desc_short" : "ShaveHUD non è più compatibile con il BLT regolare.\nAggiorna la tua versione al SuperBLT per continuare ad usarlo.\nPuoi trovare il SuperBLT su '$URL'.",
     "shavehud_dialog_update_install_folder_title" : "Aggiornamenti automatici di [ShaveHUD] compromessi!",
-    "shavehud_dialog_update_install_folder_desc" : "Per gli aggiornamenti automatici, la cartella d'installazione di ShaveHUD \ndeve chiamarsi 'mods/ShaveHUD-master/'. \n(Attualmente si chiama 'mods/$FOLDER/')",
+    "shavehud_dialog_update_install_folder_desc" : "Per gli aggiornamenti automatici, la cartella d'installazione di ShaveHUD \ndeve chiamarsi 'mods/ShaveHUD/'. \n(Attualmente si chiama 'mods/$FOLDER/')",
     "shavehud_notification_disabled_override_title" : "ShaveHUD: $NAME è attualmente disabilitato.",
     "shavehud_notification_disabled_override_desc" : "Se hai cambiato idea, clicca qui per fartelo chiedere di nuovo.",
     "shavehud_notification_restart_override_title" : "ShaveHUD: $NAME è pronto per l'installazione.",

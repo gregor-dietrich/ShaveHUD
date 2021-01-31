@@ -14,7 +14,7 @@
 	"shavehud_dialog_requires_superblt_desc_long" : "ShaveHUD 需要 SuperBLT 才能工作。\nSuperBLT 为 PAYDAY 2 老 BLT 模组加载器的分支版本，并且有许多重大的改进。 \n它完全向后兼容原版的 BLT Mods。\n\n您可在此链接中查看更多信息与安装介绍： \n$URL",
 	"shavehud_dialog_requires_superblt_desc_short" : "ShaveHUD 将不再支持老版本 BLT\n若要继续使用，请更新到 SuperBLT\n您可在此处下载 SuperBLT： '$URL'。",
 	"shavehud_dialog_update_install_folder_title" : "[ShaveHUD] 无法启用自动更新！",
-	"shavehud_dialog_update_install_folder_desc" : "若要启用自动更新，请将 ShaveHUD 的安装目录重命名为 'ShaveHUD-master'。 \n（当前文件夹名为为 '$FOLDER'）",
+	"shavehud_dialog_update_install_folder_desc" : "若要启用自动更新，请将 ShaveHUD 的安装目录重命名为 'ShaveHUD'。 \n（当前文件夹名为为 '$FOLDER'）",
 	"shavehud_notification_disabled_override_title" : "ShaveHUD: $NAME 当前已禁用。",
 	"shavehud_notification_disabled_override_desc" : "如果您改变了主意，点击这里再次询问。",
 	"shavehud_notification_restart_override_title" : "ShaveHUD：准备安装 $NAME。",

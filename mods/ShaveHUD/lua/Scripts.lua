@@ -528,19 +528,4 @@ elseif string.lower(RequiredScript) == "lib/units/beings/player/playerdamage" th
             managers.game_play_central:sync_play_impact_flesh(hit_pos, attack_dir)
         end)
 	end
-elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copinventory" then
-	if ShaveHUD:getSetting({"Misc", "SHIELD_DESPAWN_TIMER"}, true) then
-		Hooks:PostHook( CopInventory, "drop_shield", "ShieldDespawnTimer", function( u )
-			if alive( u._shield_unit ) then
-				local function clbk_hide()
-					if alive( u._shield_unit ) then
-						managers.enemy:unregister_shield( u._shield_unit )
-						u._shield_unit:set_slot( 0 )
-						u._shield_unit = nil
-					end
-				end
-				managers.enemy:add_delayed_clbk( "", clbk_hide, ShaveHUD:getSetting({"Misc", "SHIELD_DESPAWN_TIMER_VALUE"}, 3) )
-			end
-		end)
-	end
 end
