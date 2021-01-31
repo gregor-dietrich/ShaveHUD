@@ -21,7 +21,7 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/30587
 - **Cheater Kicker** by Sora
 	- https://modwork.shop/21487
-- **Clear Descriptions** by Vectis
+- **Clear Descriptions** by Vectis, updated by Takku (me)
 	- https://modwork.shop/19548
 - **Correct Armour Sorting** by lekousin
 	- https://modwork.shop/13585
