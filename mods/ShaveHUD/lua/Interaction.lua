@@ -313,13 +313,91 @@ elseif string.lower(RequiredScript) == "lib/units/beings/player/states/playerdri
 			self._interaction_locked = is_locked
 		end
 	end
+elseif string.lower(RequiredScript) == "lib/units/beings/player/states/playercarry" then
+	if not ShaveHUD:getSetting({"Misc", "NO_BAG_TILT"}, true) then
+		return
+	end
+    
+	PlayerCarry.target_tilt = 0 --original: -5
+elseif string.lower(RequiredScript) == "lib/units/beings/player/states/playermaskoff" then
+	if not ShaveHUD:getSetting({"INTERACTION", "PRESSTOMASKUP"}, true) then
+		return
+	end
+	--PRESS ONCE TO MASK UP by hejoro (template script Toggle Interact by LazyOzzy)
+    --Press your mask key only once to put it on (NOT instant mask up)
+    if not _PlayerMaskOff__check_use_item then _PlayerMaskOff__check_use_item = PlayerMaskOff._check_use_item end
+    function PlayerMaskOff:_check_use_item( t, input )
+        if input.btn_use_item_press and self._start_standard_expire_t then
+            self:_interupt_action_start_standard()
+            return false
+        elseif input.btn_use_item_release then
+            return false
+        end
+        return _PlayerMaskOff__check_use_item(self, t, input)
+    end
+elseif string.lower(RequiredScript) == "lib/states/ingameparachuting" then
+	if not ShaveHUD:getSetting({"EQUIPMENT", "AUTO_DISCARD_PARACHUTE"}, true) then
+		return
+	end
+	
+	local at_exit_actual = IngameParachuting.at_exit
+	function IngameParachuting:at_exit(...)
+		at_exit_actual(self, ...)
 
+		local playermanager = managers.player
+		if playermanager:get_my_carry_data() ~= nil then
+			playermanager:drop_carry()
+		end
+	end
+elseif string.lower(RequiredScript) == "lib/units/beings/player/states/playertased" then
+	if not ShaveHUD:getSetting({"Fixes", "COUNTER_TASER"}, true) then
+		return
+	end
+
+	Hooks:PostHook( PlayerTased, "on_tase_ended", "crash_prevent_1", function(self)
+		self._tase_ended = true
+	end)
+
+	Hooks:PostHook( PlayerTased, "exit", "crash_prevent_2", function(self, state_data, enter_data)
+		self._tase_ended = nil
+	end)
+
+	function PlayerTased:call_teammate(line, t, no_gesture, skip_alert)
+		local voice_type, plural, prime_target = self:_get_unit_intimidation_action(true, false, false, true, false)
+		local interact_type, queue_name
+		if voice_type == "stop_cop" or voice_type == "mark_cop" then
+			local prime_target_tweak = tweak_data.character[prime_target.unit:base()._tweak_table]
+			local shout_sound = prime_target_tweak.priority_shout
+			shout_sound = managers.groupai:state():whisper_mode() and prime_target_tweak.silent_priority_shout or shout_sound
+			if shout_sound then
+				interact_type = "cmd_point"
+				queue_name = "s07x_sin"
+				if managers.player:has_category_upgrade("player", "special_enemy_highlight") then
+					prime_target.unit:contour():add(managers.player:get_contour_for_marked_enemy(), true, managers.player:upgrade_value("player", "mark_enemy_time_multiplier", 1))
+				end
+				if not self._tase_ended and managers.player:has_category_upgrade("player", "escape_taser") and prime_target.unit:key() == self._unit:character_damage():tase_data().attacker_unit:key() then
+					self:_start_action_counter_tase(t, prime_target)
+				end
+			end
+		end
+		if interact_type then
+			if not no_gesture then
+			else
+			end
+			--self:_do_action_intimidate(t, interact_type or nil, queue_name, skip_alert)
+		end
+	end
 elseif string.lower(RequiredScript) == "lib/managers/hudmanagerpd2" then
-
 	function HUDManager:set_interaction_bar_locked(status, tweak_entry)
 		self._hud_interaction:set_locked(status, tweak_entry)
 	end
 
+	if not ShaveHUD:getSetting({"SkipIt", "SKIP_BLACKSCREEN"}, true) then
+		function HUDManager:set_blackscreen_skip_circle(current, total)
+			IngameWaitingForPlayersState._skip_data = {total = 0, current = 1}
+			managers.hud._hud_blackscreen:set_skip_circle(current, total)
+		end
+	end
 elseif string.lower(RequiredScript) == "lib/managers/hud/hudinteraction" then
 	local init_original 				= HUDInteraction.init
 	local show_interaction_bar_original = HUDInteraction.show_interaction_bar
@@ -609,5 +687,82 @@ elseif string.lower(RequiredScript) == "lib/units/beings/player/states/playerbip
 				_update_check_actions(self, t, dt, paused)
 			end
 		end
+	end
+elseif string.lower(RequiredScript) == "lib/managers/hud/hudlootscreen" then
+	if not ShaveHUD:getSetting({"SkipIt", "INSTANT_CARDFLIP"}, true) then
+		return
+	end
+	
+	function HUDLootScreen:begin_flip_card(peer_id)
+		self._peer_data[peer_id].wait_t = 0
+		local type_to_card = {
+			weapon_mods = 2,
+			materials = 5,
+			colors = 6,
+			safes = 8,
+			cash = 3,
+			masks = 1,
+			xp = 4,
+			textures = 7,
+			drills = 9,
+			weapon_bonus = 10
+		}
+		local card_nums = {
+			"upcard_mask",
+			"upcard_weapon",
+			"upcard_cash",
+			"upcard_xp",
+			"upcard_material",
+			"upcard_color",
+			"upcard_pattern",
+			"upcard_safe",
+			"upcard_drill",
+			"upcard_weapon_bonus"
+		}
+	
+		table.insert(card_nums, "upcard_cosmetic")
+	
+		type_to_card.weapon_skins = #card_nums
+		type_to_card.armor_skins = #card_nums
+		local lootdrop_data = self._peer_data[peer_id].lootdrops
+		local item_category = lootdrop_data[3]
+		local item_id = lootdrop_data[4]
+		local item_pc = lootdrop_data[6]
+	
+		if item_category == "weapon_mods" and managers.weapon_factory:get_type_from_part_id(item_id) == "bonus" then
+			item_category = "weapon_bonus"
+		end
+	
+		local card_i = type_to_card[item_category] or math.max(item_pc, 1)
+		local texture, rect, coords = tweak_data.hud_icons:get_icon_data(card_nums[card_i] or "downcard_overkill_deck")
+		local panel = self._peers_panel:child("peer" .. tostring(peer_id))
+		local card_info_panel = panel:child("card_info")
+		local main_text = card_info_panel:child("main_text")
+	
+		main_text:set_text(managers.localization:to_upper_text("menu_l_choose_card_chosen", {
+			time = 0
+		}))
+	
+		local _, _, _, hh = main_text:text_rect()
+	
+		main_text:set_h(hh + 2)
+	
+		local card_panel = panel:child("card" .. self._peer_data[peer_id].chosen_card_id)
+		local upcard = card_panel:child("upcard")
+	
+		upcard:set_image(texture)
+	
+		if coords then
+			local tl = Vector3(coords[1][1], coords[1][2], 0)
+			local tr = Vector3(coords[2][1], coords[2][2], 0)
+			local bl = Vector3(coords[3][1], coords[3][2], 0)
+			local br = Vector3(coords[4][1], coords[4][2], 0)
+	
+			upcard:set_texture_coordinates(tl, tr, bl, br)
+		else
+			upcard:set_texture_rect(unpack(rect))
+		end
+	
+		self._peer_data[peer_id].chosen_card_id = nil
 	end
 end

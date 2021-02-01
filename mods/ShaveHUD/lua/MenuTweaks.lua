@@ -1523,4 +1523,69 @@ elseif string.lower(RequiredScript) == "lib/managers/localizationmanager" then
 		or testAllStrings == true and string_id
 		or text_orig(self, string_id, ...)
 	end
+elseif string.lower(RequiredScript) == "lib/setups/menusetup" then
+	if not ShaveHUD:getSetting({"SkipIt", "SKIP_INTROS"}, true) then
+		return
+	end
+	------------
+	-- Purpose: Hooks MenuSetup:init_game() to force the game to skip the intro videos and go straight to the attract screen (as
+	--          though -skip_intro had been specified on the command line)
+	------------
+
+	local init_game_actual = MenuSetup.init_game
+	function MenuSetup:init_game(...)
+		local result = init_game_actual(self, ...)
+
+		game_state_machine:set_boot_intro_done(true)
+		-- WARNING: Do not go straight to "menu_main" as that bypasses loading of the savefile and is likely to cause data loss (not
+		-- extensively tested)
+		game_state_machine:change_state_by_name("menu_titlescreen")
+
+		return result
+	end
+elseif string.lower(RequiredScript) == "lib/states/menutitlescreenstate" then
+	if not ShaveHUD:getSetting({"SkipIt", "SKIP_INTROS"}, true) then
+		return
+	end
+	------------
+	-- Purpose: Hooks MenuTitlescreenState:get_start_pressed_controller_index() to trigger the game to proceed straight to the main
+	--          menu with keyboard input instead of waiting on the attract screen, and also hooks
+	--          MenuTitlescreenState:_load_savegames_done() to suppress the menu entry sound that is played when the main menu is
+	--          entered (but only for automatic entries)
+	------------
+
+	local silenced = false
+
+	local get_start_pressed_controller_index_actual = MenuTitlescreenState.get_start_pressed_controller_index
+	function MenuTitlescreenState:get_start_pressed_controller_index(...)
+
+		local num_connected = 0
+		local keyboard_index = nil
+
+		for index, controller in ipairs(self._controller_list) do
+			if controller._was_connected then
+				num_connected = num_connected + 1
+			end
+			if controller._default_controller_id == "keyboard" then
+				keyboard_index = index
+			end
+		end
+
+		if num_connected == 1 and keyboard_index ~= nil then
+			silenced = true
+			return keyboard_index
+		else
+			return get_start_pressed_controller_index_actual(self, ...)
+		end
+	end
+
+	local _load_savegames_done_actual = MenuTitlescreenState._load_savegames_done
+	function MenuTitlescreenState:_load_savegames_done(...)
+		if silenced then
+			-- Shush. Don't play that sound if this is an automatic entry
+			self:gsm():change_state_by_name("menu_main")
+		else
+			_load_savegames_done_actual(self, ...)
+		end
+	end
 end
