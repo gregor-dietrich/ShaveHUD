@@ -1,44 +1,43 @@
-[
-    {
-        "ident": "shavehud",
-        "hash": "90536eebe407fb3bf50ba5b5e87ce974e8f7040ca6ee9aca9116db2c357e8041",
-        "download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD.zip",
-        "patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
-    },
+[{
+		"ident": "shavehud",
+		"hash": "90536eebe407fb3bf50ba5b5e87ce974e8f7040ca6ee9aca9116db2c357e8041",
+		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD.zip",
+		"patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
+	},
 	{
-        "ident": "shavehud_beta",
-        "hash": "734803a23e8cdfa1cb66a6321013e2a929e0cb4a6dd212e8506a434994a4e595",
-        "download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD_beta.zip",
-        "patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
-    },
+		"ident": "shavehud_beta",
+		"hash": "734803a23e8cdfa1cb66a6321013e2a929e0cb4a6dd212e8506a434994a4e595",
+		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD_beta.zip",
+		"patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
+	},
 	{
-        "ident": "shavehud_assets",
-        "hash": "f55be8fc3b3d46d88fea8986121bc069d0cd0adddf4ba4e5c17a99013ae7a9e0",
-        "download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD_Assets.zip",
-        "patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
-    },
+		"ident": "shavehud_assets",
+		"hash": "f55be8fc3b3d46d88fea8986121bc069d0cd0adddf4ba4e5c17a99013ae7a9e0",
+		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD_Assets.zip",
+		"patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
+	},
 	{
-        "ident": "shavehud_extras",
-        "hash": "1299add998a290876341f2192c784bb7e8879f99e993c332b763e67291f8949b",
-        "download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD_Extras.zip",
-        "patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
-    },
+		"ident": "shavehud_extras",
+		"hash": "1299add998a290876341f2192c784bb7e8879f99e993c332b763e67291f8949b",
+		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/ShaveHUD_Extras.zip",
+		"patchnotes_url": "https://github.com/xtakku/ShaveHUD/releases/latest"
+	},
 	{
-        "ident": "hawks_soundpack",
-        "hash": "c375cfba781fe410e06ceaefb5f94f89cb462a20730e7ed63c3bb06fce68f41f",
-        "download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Hawks_Soundpack.zip",
-        "patchnotes_url": "https://modworkshop.net/mod/1529#changelog"
-    },
+		"ident": "hawks_soundpack",
+		"hash": "c375cfba781fe410e06ceaefb5f94f89cb462a20730e7ed63c3bb06fce68f41f",
+		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Hawks_Soundpack.zip",
+		"patchnotes_url": "https://modworkshop.net/mod/1529#changelog"
+	},
 	{
 		"ident": "clear_descriptions",
 		"hash": "e01a1456b26711c6d2bacf76a3c3370329ba90b6cc7f3a5a63fcd97aefb22abb",
 		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Clear_Descriptions.zip",
-		"patchnotes_url": "https://modworkshop.net/mod/30848#changelog",
+		"patchnotes_url": "https://modworkshop.net/mod/30848#changelog"
 	},
 	{
 		"ident": "inventory_count",
 		"hash": "82f0c55a7abf3dc332288323e8f0d0a00d7008693e776eaa04493af8030d102e",
 		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Inventory_Count.zip",
-		"patchnotes_url": "https://modworkshop.net/mod/20427#changelog",
+		"patchnotes_url": "https://modworkshop.net/mod/20427#changelog"
 	}
 ]
