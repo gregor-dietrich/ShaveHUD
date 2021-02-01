@@ -326,7 +326,7 @@ elseif string.lower(RequiredScript) == "lib/managers/menu/newheistsgui" then
 	function NewHeistsGui:set_enabled(enabled)
 		self._content_panel:set_visible(false)
 	end
-elseif string.lower(RequiredScript) == "lib/managers/menu/blackmarketgui" then
+elseif string.lower(RequiredScript) == "lib/managers/menu/blackmarketgui" then	
 	-- Correct Armor Sorting
 	if ShaveHUD:getSetting({"INVENTORY", "CORRECT_ARMOR_SORTING"}, true) then
 		function BlackMarketGui:populate_armors(data)
@@ -461,6 +461,7 @@ elseif string.lower(RequiredScript) == "lib/managers/menu/blackmarketgui" then
 		return populate_mods_original(self, data, ...)
 	end
 
+	
 	local function getEquipmentAmount(name_id)
 		local data = tweak_data.equipments[name_id]
 		if data and data.quantity then
@@ -485,18 +486,22 @@ elseif string.lower(RequiredScript) == "lib/managers/menu/blackmarketgui" then
 	local populate_deployables_original = BlackMarketGui.populate_deployables
 	function BlackMarketGui:populate_deployables(data, ...)
 		populate_deployables_original(self, data, ...)
-		for i, equipment in ipairs(data) do
-			equipment.name_localized = equipment.name_localized .. (equipment.unlocked and getEquipmentAmount(equipment.name) or "")
+		if ShaveHUD:getSetting({"INVENTORY", "INVENTORY_COUNT"}, true) then
+			for i, equipment in ipairs(data) do
+				equipment.name_localized = equipment.name_localized .. (equipment.unlocked and getEquipmentAmount(equipment.name) or "")
+			end
 		end
 	end
 
 	local populate_grenades_original = BlackMarketGui.populate_grenades
 	function BlackMarketGui:populate_grenades(data, ...)
 		populate_grenades_original(self, data, ...)
-		local t_data = tweak_data.blackmarket.projectiles
-		for i, throwable in ipairs(data) do
-			local has_amount = throwable.unlocked and t_data[throwable.name] or false
-			throwable.name_localized = throwable.name_localized .. (has_amount and " (x" .. t_data[throwable.name].max_amount .. ")" or "")
+		if ShaveHUD:getSetting({"INVENTORY", "INVENTORY_COUNT"}, true) then
+			local t_data = tweak_data.blackmarket.projectiles
+			for i, throwable in ipairs(data) do
+				local has_amount = throwable.unlocked and t_data[throwable.name] or false
+				throwable.name_localized = throwable.name_localized .. (has_amount and " (x" .. t_data[throwable.name].max_amount .. ")" or "")
+			end
 		end
 	end
 
@@ -1426,5 +1431,94 @@ elseif string.lower(RequiredScript) == "lib/managers/menumanagerdialogs" then
 				end
 		]]
 		close_person_joining_original(self, id, ...)
+	end
+elseif string.lower(RequiredScript) == "lib/managers/localizationmanager" then
+	if not ShaveHUD:getSetting({"INVENTORY", "CLEAR_DESCRIPTIONS"}, true) then
+		return
+	end
+
+	local some_strings = {
+		-- Throwables
+		bm_ability_chico_injector_desc = "Duration: 6s\nCooldown: 30s\nCooldown Reduction: 1s on kill\n\nHealth Gain per damage (>=50% health): 75%\nHealth Gain per damage (<50% health): 100%\n\n",
+		bm_concussion_desc = "Damage: 0 + Stun\nExplosion Radius: 15m\nThrow Delay: 0.1s\nThrow Rate: 1.5s\nUnequip Delay: 0.9s\n\nStun Duration: 3s + 5s Accuracy Debuff (-50%)\n\n",
+		bm_dynamite_desc = "Max Damage: 1,600\nExplosion Radius: 5m\nThrow Delay: 0.1s\nThrow Rate: 1.5s\nUnequip Delay: 1.3s\n\n",
+		bm_grenade_dada_com_desc = "Max Damage: 1,600\nExplosion Radius: 10m\nThrow Delay: 0.1s\nThrow Rate: 1.5s\nUnequip Delay: 1.3s\n\n",
+		bm_grenade_damage_control_desc = "Cooldown: 10s\nCooldown Reduction (>= 35% health): 1s on kill\nCooldown Reduction (< 35% health): 2s on kill\n\n",
+		bm_grenade_fir_com_desc = "Damage: 30 (Explosion) + 750 (DoT, if proc)\nExplosion Radius: 5m\nThrow Delay: 0.1s\nThrow Rate: 1.5s\nUnequip Delay: 1.3s\n\nFire Proc Chance: 35%\nFire Damage/Tick: 250 every 0.5s (after 1.0s delay)\nFire DoT Duration: 1.1s\nStun Duration: 4.3s\n\n",
+		bm_grenade_frag_desc = "Max Damage: 1,600\nExplosion Radius: 5m\nThrow Delay: 0.1s\nThrow Rate: 1.5s\nUnequip Delay: 1.1s\n\n",
+		bm_grenade_frag_com_desc = "Max Damage: 1,600\nExplosion Radius: 5m\nThrow Delay: 0.1s\nThrow Rate: 1.5s\nUnequip Delay: 1.1s\n\n",
+		bm_grenade_molotov_desc = "Damage: 30 (Explosion) + 1,500 (DoT, if proc)\n+ 10 every 0.5s for 15s (AoE)\nExplosion Radius: 5m\nThrow Delay: 0.1s\nThrow Rate: 1.5s\nUnequip Delay: 1.3s\n\nFire Proc Chance: 35%\nFire Damage/Tick: 150 every 0.5s (after 1.0s delay)\nFire DoT Duration: 5s\nStun Duration: 4.3s\n\n",
+		bm_grenade_pocket_ecm_jammer_desc = "Effect Duration: 6s\nCooldown: 100s per charge\nCooldown Reduction: 6s on kill\n\nDuring Feedback:\nHealth Gain on kill: 20\nHealth Gain on teammate kill: 10\n\nSecond charge cannot be activated while the first is still active. Chaining your own charges might glitch the second's duration to 0.25s.\n\n",
+		bm_grenade_smoke_screen_grenade_desc = "Damage: 0\nSmoke Radius: 15m\n\nSmoke Duration: 10s\nCooldown: 60s (on activation)\nCooldown Reduction: 1s on kill\n\nDodge: +15% (Self) / +10% (Team)\nBullet Evasion: 50% (Self+Team)\nAccuracy: -50% (Enemies)\nAdditionally, doubles temporary Dodge when hit (from \"Twitch\" perk) to 40% total.\n\n",
+		bm_grenade_tag_team_desc = "Tag Range: 18m\n\nTag Duration: 12s\nDuration Extension: 1.3s on kill\nCooldown: 60s (on activation)\nCooldown Reduction: 2s on kill\nHealth Gain (self): 15 on kill\nHealth Gain (tagged): 7.5 on kill\n\n",
+		bm_wpn_prj_ace_desc = "Damage: 40\nProjectile Speed: 15m/s\nThrow Delay: 0.15s\nThrow Rate: 0.3s\nUnequip Delay: 1.1s\n\n",
+		bm_wpn_prj_four_desc = "Damage: 100 (Hit) + 2,750 (DoT, 100% proc)\nProjectile Speed: 15m/s\nThrow Delay: 0.15s\nThrow Rate: 0.5s\nUnequip Delay: 1.1s\n\nPoison Damage/Tick: 250 every 0.5s (after 0.5s delay)\nPoison DoT Duration: 5.5s\nStun Duration: 5.5s\n\n",
+		bm_wpn_prj_jav_desc = "Damage: 3,250\nProjectile Speed: 15m/s\nThrow Delay: 0.4s\nThrow Rate: 1.0s\nUnequip Delay: 1.1s\n\n",
+		bm_wpn_prj_hur_desc = "Damage: 1,100\nProjectile Speed: 10m/s\nThrow Delay: 0.15s\nThrow Rate: 0.5s\nUnequip Delay: 1.1s\n\n",
+		bm_wpn_prj_target_desc = "Damage: 1,100\nProjectile Speed: 10m/s\nThrow Delay: 0.1s\nThrow Rate: 0.5s\nUnequip Delay: 1.1s\n\n",
+		-- Weapon Gadgets
+		bm_wp_upg_fl_crimson_desc = "Togglable laser sight.\n\n",
+		bm_wp_upg_fl_x400v_desc = "Togglable laser sight and flashlight.\n\n",
+		bm_wp_upg_fl_pis_tlr1_desc = "Togglable flashlight.\n\n",
+		bm_wp_upg_fl_pis_laser_desc = "Togglable laser sight.\n\n",
+		bm_wp_upg_fl_pis_m3x_desc = "Togglable flashlight.\n\n",
+		bm_wp_pis_g_laser_desc = "Togglable laser sight.\n\n",
+		bm_wp_pis_ppk_g_laser_desc = "Togglable laser sight.",
+		bm_wp_upg_fl_ass_smg_sho_surefire_desc = "Togglable flashlight.\n\n",
+		bm_wp_upg_fl_ass_smg_sho_peqbox_desc = "Togglable laser sight.\n\n",
+		bm_wp_upg_fl_ass_laser_desc = "Togglable laser sight.\n\n",
+		bm_wp_upg_fl_ass_peq15_desc = "Togglable laser sight and flashlight.\n\n",
+		bm_wp_upg_fl_ass_utg_desc = "Togglable laser sight and flashlight.\n\n",
+		bm_wpn_fps_upg_o_45iron_desc = "Togglable iron sights.\n\n",
+		bm_wpn_fps_upg_o_45rds_desc = "Togglable red dot sight.\n\n",
+		bm_wpn_fps_upg_o_45rds_v2_desc = "Togglable red dot sight.\n\n",
+		bm_wpn_fps_upg_o_xpsg33_magnifier_desc = "Togglable sight magnifier.\n\n",
+		bm_wp_mp5_fg_flash_desc = "Togglable flashlight.\n\n",
+		bm_wp_schakal_vg_surefire_desc = "Togglable laser sight and flashlight.\n\n"
+	}
+	local old_text = LocalizationManager.text
+	function LocalizationManager:text(string_id, ...)
+		local new_string = some_strings[string_id] or ""
+		return new_string .. old_text(self,string_id,...)
+	end
+
+    local testAllStrings = false
+	local text_orig = LocalizationManager.text
+    function LocalizationManager:text(string_id, ...)
+		return string_id == "bm_wp_mosin_ns_bayonet_desc" and "Increases Weapon Butt base damage to 40 and base knockdown to 70."
+			-- Arrows
+			or string_id == "bm_wp_bow_long_explosion_desc" and "Explosive arrow that deals damage in an area, and goes through shields and armor. Deals extra damage to armor plating and Captain Winters. Cannot headshot or be retrieved."
+			or string_id == "bm_wp_bow_long_poison_desc" and "Poison arrows deal 250 damage every 0.5s (after 0.5s delay) for 5.5s, with a 50% chance to stun enemies for the duration."
+			or string_id == "bm_wp_upg_a_bow_poison_desc" and "Poison arrows deal 250 damage every 0.5s (after 0.5s delay) for 5.5s, with a 50% chance to stun enemies for the duration."
+			or string_id == "bm_wpn_fps_upg_a_bow_explosion_desc" and "Explosive arrow that deals damage in an area, and goes through shields and armor. Deals extra damage to armor plating and Captain Winters. Cannot headshot or be retrieved."
+			or string_id == "bm_wp_elastic_m_explosive_desc" and "Explosive arrow that deals damage in an area, and goes through shields and armor. Deals extra damage to armor plating and Captain Winters. Cannot headshot or be retrieved."
+			or string_id == "bm_wp_elastic_m_poison_desc" and "Poison arrows deal 250 damage every 0.5s (after 0.5s delay) for 5.5s, with a 50% chance to stun enemies for the duration."
+			or string_id == "bm_wp_ecp_m_arrows_explosive_desc" and "Explosive arrow that deals damage in an area, and goes through shields and armor. Deals extra damage to armor plating and Captain Winters. Cannot headshot or be retrieved."
+			or string_id == "bm_wp_ecp_m_arrows_poison_desc" and "Poison arrows deal 250 damage every 0.5s (after 0.5s delay) for 5.5s, with a 50% chance to stun enemies for the duration."
+			-- Bolts
+			or string_id == "bm_wp_upg_a_frankish_explosion_desc" and "Explosive bolt that deals damage in an area, and goes through shields and armor. Deals extra damage to armor plating and Captain Winters. Cannot headshot or be retrieved."
+			or string_id == "bm_wp_upg_a_frankish_poison_desc" and "Poison bolts deal 250 damage every 0.5s (after 0.5s delay) for 5.5s, with a 50% chance to stun enemies for the duration."
+			or string_id == "bm_wp_upg_a_arblast_explosion_desc" and "Explosive bolt that deals damage in an area, and goes through shields and armor. Deals extra damage to armor plating and Captain Winters. Cannot headshot or be retrieved."
+			or string_id == "bm_wp_upg_a_arblast_poison_desc" and "Poison bolts deal 250 damage every 0.5s (after 0.5s delay) for 5.5s, with a 50% chance to stun enemies for the duration."
+			or string_id == "bm_wp_upg_a_crossbow_explosion_desc" and "Explosive bolt that deals damage in an area, and goes through shields and armor. Deals extra damage to armor plating and Captain Winters. Cannot headshot or be retrieved."
+			or string_id == "bm_wp_upg_a_crossbow_poison_desc" and "Poison bolts deal 250 damage every 0.5s (after 0.5s delay) for 5.5s, with a 50% chance to stun enemies for the duration."
+			-- Melee Weapons
+			or string_id == "bm_melee_taser_info" and "Interrupts and stuns the target for 3.2, 3.4, 3.7 or 3.9 seconds (25% chance each). Bulldozers are only stunned for 0.01 seconds. Does not work on unique enemies (\"bosses\")."
+			or string_id == "bm_melee_zeus_info" and "Interrupts and stuns the target for 3.2, 3.4, 3.7 or 3.9 seconds (25% chance each). Bulldozers are only stunned for 0.01 seconds. Does not work on unique enemies (\"bosses\")."
+			or string_id == "bm_melee_fear_info" and "The syringe is filled with poison, dealing 250 damage once (after 0.5s delay), with a 70% chance to stun enemies for 0.5s."
+			or string_id == "bm_melee_cqc_info" and "The Kunai is coated in poison, dealing 250 damage once (after 0.5s delay), with a 70% chance to stun enemies for 0.5s."
+			-- Shotgun Ammo
+			or string_id == "bm_wp_upg_a_custom_desc" and "Increased damage. Range: 20-50m"
+			or string_id == "bm_wp_upg_a_custom2_desc" and "Increased damage. Range: 20-50m"
+			or string_id == "bm_wp_upg_a_explosive_desc" and "Long range explosive slug. Penetrates shields and deals extra damage to armor plating and Captain Winters. Cannot headshot. Range: 40-115m"
+			or string_id == "bm_wp_upg_a_piercing_desc" and "Long range flechettes. Penetrates armor. Range: 40-91m"
+			or string_id == "bm_wp_upg_a_slug_desc" and "Long range slug. Penetrates enemies, armor, shields, and walls. Range: 40-74.5m"
+			or string_id == "bm_wp_upg_a_slug2_desc" and "Long range slug. Penetrates enemies, armor, shields, and walls. Range: 40-74.5m"
+			or string_id == "bm_wp_upg_a_dragons_breath_desc" and "Pellets ignite enemies less than 30 m away, dealing 100 damage every 0.5s for 2.1s (after 1.0s delay). Pierces shields and armor. Cannot headshot or be silenced. Range: 40-74.5m"
+			-- Launcher Ammo
+			or string_id == "bm_wp_upg_a_grenade_launcher_incendiary_desc" and "Incendiary rounds leave patches of fire for 6s (3s if Arbiter) that deal 30 damage every 0.5s. Damage has a 35% chance to ignite enemies, dealing 150 damage every 0.5s (after 1.0s delay) for 5s and stunning them for 4.3s."
+			
+		or testAllStrings == true and string_id
+		or text_orig(self, string_id, ...)
 	end
 end

@@ -45,7 +45,7 @@
 
 				<group :hook_id="localizationmanager">
 					<post :script_path="AdvAssault.lua"/>
-					<post :script_path="Scripts.lua"/>
+					<post :script_path="MenuTweaks.lua"/>
 				</group>
 
 				<group :hook_id="menumanager">
@@ -151,11 +151,7 @@
 					<post :hook_id="menuscenemanager" :script_path="MenuTweaks.lua"/>
 					<post :hook_id="menucomponentmanager" :script_path="MenuTweaks.lua"/>
 					<post :hook_id="newheistsgui" :script_path="MenuTweaks.lua"/>
-
-					<group :hook_id="blackmarketgui">
-						<post :script_path="MenuTweaks.lua"/>
-						<post :script_path="InventoryCount.lua"/>
-					</group>
+					<post :hook_id="blackmarketgui" :script_path="MenuTweaks.lua"/>
 
 					<group :hook_id="contractboxgui">
 						<post :script_path="MenuTweaks.lua"/>

@@ -115,7 +115,7 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/29408
 - **Shield Despawn Timer** by Jindetta
 	- https://modwork.shop/19522
-- **Shortened Gun Names** by Vectis
+- **Shortened Gun Names** by Vectis, updated by Takku (me)
 	- https://modwork.shop/19369
 - **Shotgun Reload Fix** by Zdann
 	- https://modwork.shop/28937
