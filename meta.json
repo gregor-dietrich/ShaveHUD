@@ -31,13 +31,13 @@
     },
 	{
 		"ident": "clear_descriptions",
-		"hash": "abc",
+		"hash": "e01a1456b26711c6d2bacf76a3c3370329ba90b6cc7f3a5a63fcd97aefb22abb",
 		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Clear_Descriptions.zip",
 		"patchnotes_url": "https://modworkshop.net/mod/30848#changelog",
 	},
 	{
 		"ident": "inventory_count",
-		"hash": "abc",
+		"hash": "82f0c55a7abf3dc332288323e8f0d0a00d7008693e776eaa04493af8030d102e",
 		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Inventory_Count.zip",
 		"patchnotes_url": "https://modworkshop.net/mod/20427#changelog",
 	}
