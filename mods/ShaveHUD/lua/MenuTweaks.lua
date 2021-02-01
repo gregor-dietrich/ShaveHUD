@@ -1473,6 +1473,8 @@ elseif string.lower(RequiredScript) == "lib/managers/localizationmanager" then
 		bm_wpn_fps_upg_o_45rds_desc = "Togglable red dot sight.\n\n",
 		bm_wpn_fps_upg_o_45rds_v2_desc = "Togglable red dot sight.\n\n",
 		bm_wpn_fps_upg_o_xpsg33_magnifier_desc = "Togglable sight magnifier.\n\n",
+		bm_wpn_fps_upg_o_sig_desc = "Togglable sight magnifier.\n\n",
+		bm_wpn_fps_upg_o_45steel_desc = "Togglable iron sight.\n\n",
 		bm_wp_mp5_fg_flash_desc = "Togglable flashlight.\n\n",
 		bm_wp_schakal_vg_surefire_desc = "Togglable laser sight and flashlight.\n\n"
 	}
