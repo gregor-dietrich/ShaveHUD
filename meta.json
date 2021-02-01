@@ -28,5 +28,17 @@
         "hash": "c375cfba781fe410e06ceaefb5f94f89cb462a20730e7ed63c3bb06fce68f41f",
         "download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Hawks_Soundpack.zip",
         "patchnotes_url": "https://modworkshop.net/mod/1529#changelog"
-    }
+    },
+	{
+		"ident": "clear_descriptions",
+		"hash": "abc",
+		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Clear_Descriptions.zip",
+		"patchnotes_url": ,
+	},
+	{
+		"ident": "inventory_count",
+		"hash": "abc",
+		"download_url": "https://github.com/xtakku/ShaveHUD/raw/assets/Inventory_Count.zip",
+		"patchnotes_url": "https://modworkshop.net/mod/20427#changelog",
+	}
 ]
