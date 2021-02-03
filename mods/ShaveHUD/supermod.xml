@@ -217,14 +217,14 @@
 					
 					<group :hook_id="cop/">
 						<post :hook_id="copinventory" :script_path="ShieldDespawnTimer.lua"/>
-						<post :hook_id="copmovement" :script_path="BulletDecapitations.lua"/>
+						<post :hook_id="copmovement" :script_path="Scripts.lua"/>
 
 						<group :hook_id="copdamage">
 							<post :script_path="GameInfoManager.lua"/>
 							<post :script_path="KillCounter.lua"/>
 							<post :script_path="DamagePopup.lua"/>
 							<post :script_path="TabStats.lua"/>
-							<post :script_path="BulletDecapitations.lua"/>
+							<post :script_path="Scripts.lua"/>
 						</group>
 					</group>
 				</group>
@@ -244,7 +244,6 @@
 					<group :hook_id="playerdamage">
 						<post :script_path="GameInfoManager.lua"/>
 						<post :script_path="DamageIndicator.lua"/>
-						<post :script_path="LadderImprovements.lua"/>
 						<post :script_path="Scripts.lua"/>
 					</group>
 
@@ -267,7 +266,7 @@
 							<post :script_path="Interaction.lua"/>
 							<post :script_path="BurstFire.lua"/>
 							<post :script_path="WeaponGadgets.lua"/>
-							<post :script_path="LadderImprovements.lua"/>
+							<post :script_path="Scripts.lua"/>
 						</group>
 					</group>
 				</group>
@@ -374,10 +373,10 @@
 				<post :hook_id="levelstweakdata" :script_path="Scripts.lua"/>
 
 				<group :hook_id="blackmarket/">
-					<post :hook_id="colorstweakdata" :script_path="ReturnableMaskComponents.lua"/>
-					<post :hook_id="maskstweakdata" :script_path="ReturnableMaskComponents.lua"/>
-					<post :hook_id="materialstweakdata" :script_path="ReturnableMaskComponents.lua"/>
-					<post :hook_id="texturestweakdata" :script_path="ReturnableMaskComponents.lua"/>
+					<post :hook_id="colorstweakdata" :script_path="Scripts.lua"/>
+					<post :hook_id="maskstweakdata" :script_path="Scripts.lua"/>
+					<post :hook_id="materialstweakdata" :script_path="Scripts.lua"/>
+					<post :hook_id="texturestweakdata" :script_path="Scripts.lua"/>
 				</group>
 			</group>
 		</group>
