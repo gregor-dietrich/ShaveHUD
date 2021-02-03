@@ -507,6 +507,16 @@ elseif string.lower(RequiredScript) == "lib/units/beings/player/huskplayerdamage
             managers.game_play_central:sync_play_impact_flesh(hit_pos, attack_dir)
         end)
     end
+	
+	if ShaveHUD:getSetting({"Misc", "LADDER_IMPROVEMENTS"}, true) then
+		local orig_damage = PlayerDamage.damage_fall
+		function PlayerDamage:damage_fall(...)
+			if self._unit:movement():current_state()._state_data.on_ladder then
+				return --no damage if you're using the slide-down-ladders feature
+			end
+			return orig_damage(self,...)
+		end
+	end
 elseif string.lower(RequiredScript) == "lib/units/beings/player/playerdamage" then
     if ShaveHUD:getSetting({"Misc", "PLAYER_BLOOD"}, true) then
         Hooks:PostHook(PlayerDamage, "damage_bullet", "blood_splat_pdmg", function(self, attack_data)
@@ -999,4 +1009,429 @@ elseif string.lower(RequiredScript) == "lib/tweak_data/lootdroptweakdata" then
 			}
 		end
 	end
+elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copdamage" then
+	if not ShaveHUD:getSetting({"Misc", "BULLET_DECAPITATIONS"}, true) then
+		return
+	end
+
+	if not _G.BulletDecapitations then
+		BulletDecapitations = {}
+	 end
+	 
+	if not BulletDecapitations.tweak_data then
+		BulletDecapitations.tweak_data = {}
+	 end
+	 
+	-- [[ BD Settings ]]
+	 
+	-- Change which weapons can decapitate enemies and stuff...
+	-- Set to either: 'true' or 'nil' (false).
+	BulletDecapitations.tweak_data.allowed_weapons = {
+		["assault_rifle"] = true, -- Assault Rifle
+		["pistol"] = true, -- Pistol
+		["smg"] = true, -- SMG
+		["shotgun"] = true, -- Shotgun
+		["saw"] = true, -- OVE9000 Saw
+		["lmg"] = true, -- LMG
+		["snp"] = true, -- Sniper Rifle
+		["akimbo"] = true, -- Akimbo Pistols
+		["minigun"] = true -- Minigun
+	 }
+	 
+	BulletDecapitations.tweak_data.enable_bullet_cops = true -- Enable decapitations for all allowed weapons, disable if you want want just want tasers or cloakers
+	
+	BulletDecapitations.tweak_data.twitch = true -- Enable body twitching on decapitations. Value 'true' by default.
+	 
+	BulletDecapitations.tweak_data.blood_time = 20 -- Determines how long a decapitated body will bleed.
+	BulletDecapitations.tweak_data.twitch_rate = 1 -- The interval at which a body twitches.
+	 
+	-- "all" - Cloakers can be cut from head to torso. | "head" - Cloakers can be dismembered in the head only. | "body" - Cloakers can be dismembered in the body only. | "none" - Cloakers do not use the 'true' dismemberment system.
+	BulletDecapitations.tweak_data.cloaker_decapitations = "all"
+	 
+	BulletDecapitations.tweak_data.taser_decapitations = true -- Enables the special decapitation for tasers when headshotted.
+	 
+	-- [[ End of BD Settings ]]
+	 
+	BulletDecapitations.cop_decapitation = {
+		t = {},
+		interval = {},
+		attack_data = {},
+		vfx = {},
+		ragdoll = {},
+		parts = {}
+	 }
+	 
+	Hooks:PostHook( CopDamage , "damage_bullet" , "BD_CopDamagePostDamageBullet" , function( self, attack_data )
+		if not attack_data.attacker_unit then
+			attack_data.attacker_unit = managers.player:player_unit()
+		end
+		
+		if attack_data.attacker_unit:inventory() and BulletDecapitations.tweak_data.allowed_weapons[tweak_data.weapon[attack_data.attacker_unit:inventory():equipped_unit():base():get_name_id()].category] ~= true then
+			return
+		end
+	
+		if self._dead then
+			if self._unit:base()._tweak_table == "spooc" then
+				local body = attack_data.body_name or attack_data.col_ray.body:name()
+				if (body:key() == Idstring("head"):key() or body:key() == Idstring("hit_Head"):key() or body:key() == Idstring("rag_Head"):key()) and (BulletDecapitations.tweak_data.cloaker_decapitations == "all" or BulletDecapitations.tweak_data.cloaker_decapitations == "head") or body:key() == Idstring("hit_Head"):key() or body:key() == Idstring("rag_Head"):key() and (BulletDecapitations.tweak_data.cloaker_decapitations == "all" or BulletDecapitations.tweak_data.cloaker_decapitations == "head") then
+					self._unit:sound():play("split_gen_head")
+					self._unit:damage():run_sequence_simple("dismember_head")
+				else
+					if (BulletDecapitations.tweak_data.cloaker_decapitations == "all" or BulletDecapitations.tweak_data.cloaker_decapitations == "body") then
+						self._unit:sound():play("split_gen_body")
+						self._unit:damage():run_sequence_simple("dismember_body_top")
+					end
+				end
+			end
+			if self._unit:base()._tweak_table == "taser" then
+				local body = attack_data.body_name or attack_data.col_ray.body:name()
+				if (body:key() == Idstring("head"):key() or body:key() == Idstring("hit_Head"):key() or body:key() == Idstring("rag_Head"):key()) and BulletDecapitations.tweak_data.taser_decapitations then
+					self._unit:sound():play("split_gen_head")
+					self._unit:damage():run_sequence_simple("kill_tazer_headshot")
+					return
+				end
+			end
+			if BulletDecapitations.tweak_data.enable_bullet_cops then
+				local body = attack_data.body_name or attack_data.col_ray.body:name()
+				if body:key() then
+					if not BulletDecapitations.cop_decapitation.parts[self._unit] then
+						BulletDecapitations.cop_decapitation.parts[self._unit] = {}
+					end
+				
+					self._unit:movement():enable_update()
+					self._unit:movement()._frozen = nil
+					if self._unit:movement()._active_actions[1] and self._unit:movement()._active_actions[1]:type() == "hurt" then
+						self._unit:movement()._active_actions[1]:force_ragdoll(true)
+					end
+					
+					local bone_head = self._unit:get_object(Idstring("Head"))
+					local bone_body = self._unit:get_object(Idstring("Spine1"))
+					
+					if body:key() == Idstring("head"):key() or body:key() == Idstring("hit_Head"):key() or body:key() == Idstring("rag_Head"):key() then
+						--self._unit:body(self._unit:get_object(Idstring("Head"))):set_enabled( false )
+						
+						BulletDecapitations.cop_decapitation.vfx[self._unit] = World:effect_manager():spawn({
+							effect = Idstring("effects/payday2/particles/impacts/blood/blood_tendrils"),
+							position = self._unit:get_object(Idstring("Neck")):position(),
+							rotation = self._unit:get_object(Idstring("Neck")):rotation()
+						})
+						
+						BulletDecapitations.cop_decapitation.parts[self._unit].Head = "Head"
+					
+						self:_spawn_head_gadget({
+							position = bone_head:position(),
+							rotation = bone_head:rotation(),
+							dir = -self._unit:movement():m_head_rot():y()
+						})
+					elseif body:key() == Idstring("hit_LeftArm"):key() or body:key() == Idstring("hit_LeftForeArm"):key() or body:key() == Idstring("rag_LeftArm"):key() or body:key() == Idstring("rag_LeftForeArm"):key() then
+						--self._unit:body(self._unit:get_object(Idstring("LeftArm"))):set_enabled( false )
+						--self._unit:body(self._unit:get_object(Idstring("LeftForeArm"))):set_enabled( false )
+						--self._unit:body(self._unit:get_object(Idstring("LeftHand"))):set_enabled( false )
+						
+						BulletDecapitations.cop_decapitation.parts[self._unit].LeftArm = "LeftArm"
+					elseif body:key() == Idstring("hit_RightArm"):key() or body:key() == Idstring("hit_RightForeArm"):key() or body:key() == Idstring("rag_RightArm"):key() or body:key() == Idstring("rag_RightForeArm"):key() then
+						--self._unit:body(self._unit:get_object(Idstring("RightArm"))):set_enabled( false )
+						--self._unit:body(self._unit:get_object(Idstring("RightForeArm"))):set_enabled( false )
+						--self._unit:body(self._unit:get_object(Idstring("RightHand"))):set_enabled( false )
+						
+						BulletDecapitations.cop_decapitation.parts[self._unit].RightArm = "RightArm"
+					elseif body:key() == Idstring("hit_LeftUpLeg"):key() or body:key() == Idstring("hit_LeftLeg"):key() or body:key() == Idstring("rag_LeftUpLeg"):key() or body:key() == Idstring("rag_LeftLeg"):key() then
+						--self._unit:body(self._unit:get_object(Idstring("LeftLeg"))):set_enabled( false )
+						--self._unit:body(self._unit:get_object(Idstring("LeftFoot"))):set_enabled( false )
+						
+						BulletDecapitations.cop_decapitation.parts[self._unit].LeftLeg = "LeftLeg"
+					elseif body:key() == Idstring("hit_RightUpLeg"):key() or body:key() == Idstring("hit_RightLeg"):key() or body:key() == Idstring("rag_RightUpLeg"):key() or body:key() == Idstring("rag_RightLeg"):key() then
+						--self._unit:body(self._unit:get_object(Idstring("RightLeg"))):set_enabled( false )
+						--self._unit:body(self._unit:get_object(Idstring("RightFoot"))):set_enabled( false )
+						
+						BulletDecapitations.cop_decapitation.parts[self._unit].RightLeg = "RightLeg"
+					end
+					
+					BulletDecapitations.cop_decapitation.attack_data[self._unit] = attack_data
+					BulletDecapitations.cop_decapitation.ragdoll[self._unit] = self._unit
+					
+					BulletDecapitations.cop_decapitation.t[self._unit] = Application:time() + BulletDecapitations.tweak_data.blood_time
+					BulletDecapitations.cop_decapitation.interval[self._unit] = Application:time() + BulletDecapitations.tweak_data.twitch_rate
+				end
+			end
+		end
+	end )
+
+	Hooks:PostHook( PlayerManager, "update", "BD_CopDecapitationUpdate", function(self, t, dt)
+		if not CopDamage then return end
+		if BulletDecapitations.cop_decapitation then
+			for unit, val in pairs(BulletDecapitations.cop_decapitation.ragdoll) do
+				if alive(unit) then
+				else
+					BulletDecapitations.cop_decapitation.ragdoll[unit] = nil
+					BulletDecapitations.cop_decapitation.parts[unit] = nil
+				end
+			end
+			for unit, val in pairs(BulletDecapitations.cop_decapitation.t) do
+				if alive(unit) then
+					for part , _ in pairs(BulletDecapitations.cop_decapitation.parts[unit]) do
+						if part == "Head" then
+							BulletDecapitations.cop_decapitation.vfx[unit] = World:effect_manager():spawn({
+								effect = Idstring("effects/payday2/particles/impacts/blood/blood_tendrils"),
+								position = unit:get_object(Idstring("Neck")):position(),
+								rotation = unit:get_object(Idstring("Neck")):rotation()
+							})
+							if Application:time() < val then
+								if Application:time() >= BulletDecapitations.cop_decapitation.interval[unit] then
+									BulletDecapitations.cop_decapitation.interval[unit] = Application:time() + BulletDecapitations.tweak_data.twitch_rate
+									
+									local splatter_from = unit:get_object(Idstring("Neck")):position()
+									local splatter_to = splatter_from + unit:get_object(Idstring("Neck")):rotation():y() * 100
+									local splatter_ray = unit:raycast("ray", splatter_from, splatter_to, "slot_mask", managers.slot:get_mask("world_geometry"))
+									if splatter_ray then
+										World:project_decal(Idstring("blood_spatter"), splatter_ray.position, splatter_ray.ray, splatter_ray.unit, nil, splatter_ray.normal)
+									end
+									
+									if unit:movement()._active_actions[1] and unit:movement()._active_actions[1]:type() == "hurt" then
+										unit:movement()._active_actions[1]:force_ragdoll(true)
+									end
+									local scale = BulletDecapitations.tweak_data.twitch and 0.075 or 0
+									local height = 1
+									local twist_dir = math.random(2) == 1 and 1 or -1
+									local rot_acc = (math.UP * (0.5 * twist_dir)) * -0.5
+									local rot_time = 1 + math.rand(2)
+									local nr_u_bodies = unit:num_bodies()
+									local i_u_body = 0
+									while nr_u_bodies > i_u_body do
+										local u_body = unit:body(i_u_body)
+										if u_body:enabled() and u_body:dynamic() then
+											local body_mass = u_body:mass()
+											World:play_physic_effect(Idstring("physic_effects/body_explosion"), u_body, math.UP * 600 * scale, 4 * body_mass / math.random(2), rot_acc, rot_time)
+										end
+										i_u_body = i_u_body + 1
+									end
+								end
+							else
+								BulletDecapitations.cop_decapitation.t[unit] = nil
+								BulletDecapitations.cop_decapitation.interval[unit] = nil
+								BulletDecapitations.cop_decapitation.attack_data[unit] = nil
+							end
+						end
+					end
+				else
+					BulletDecapitations.cop_decapitation.t[unit] = nil
+					BulletDecapitations.cop_decapitation.interval[unit] = nil
+					BulletDecapitations.cop_decapitation.attack_data[unit] = nil
+				end
+			end
+		end
+	end )
+elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copmovement" then
+	if not ShaveHUD:getSetting({"Misc", "BULLET_DECAPITATIONS"}, true) then
+		return
+	end
+
+	Hooks:PreHook( CopMovement , "update" , "BulletDecapitationsPreCopMovementUpdate" , function( self , unit , t , dt )
+
+		if not BulletDecapitations then return end
+		
+		for decap_unit, _ in pairs( BulletDecapitations.cop_decapitation.ragdoll ) do
+			if decap_unit == unit then
+				local bone_body = self._unit:get_object(Idstring("LeftUpLeg"))
+				local bone_body2 = self._unit:get_object(Idstring("RightUpLeg"))
+				local bone_body3 = self._unit:get_object(Idstring("LeftShoulder"))
+				local bone_body4 = self._unit:get_object(Idstring("RightShoulder"))
+				local bone_body5 = self._unit:get_object(Idstring("Spine1"))
+				
+				self._need_upd = false
+				self._force_head_upd = nil
+				
+				self:upd_ground_ray()
+				
+				--[[self._unit:movement():enable_update()
+				self._unit:movement()._frozen = nil
+				if self._unit:movement()._active_actions[1] then
+					self._unit:movement()._active_actions[1]:force_ragdoll()
+				end]]
+				
+				for part , _ in pairs( BulletDecapitations.cop_decapitation.parts[unit] ) do
+					if part == "Head" then
+						self._unit:get_object(Idstring("Head")):m_position(bone_body5:position())
+						self._unit:get_object(Idstring("Head")):set_position(bone_body5:position())
+						self._unit:get_object(Idstring("Head")):set_rotation(bone_body5:rotation())
+					elseif part == "LeftArm" then
+						self._unit:get_object(Idstring("LeftArm")):m_position(bone_body3:position())
+						self._unit:get_object(Idstring("LeftArm")):set_position(bone_body3:position())
+						self._unit:get_object(Idstring("LeftArm")):set_rotation(bone_body3:rotation())
+						self._unit:get_object(Idstring("LeftForeArm")):m_position(self._unit:get_object(Idstring("LeftArm")):position())
+						self._unit:get_object(Idstring("LeftForeArm")):set_position(self._unit:get_object(Idstring("LeftArm")):position())
+						self._unit:get_object(Idstring("LeftForeArm")):set_rotation(self._unit:get_object(Idstring("Spine1")):rotation())
+						self._unit:get_object(Idstring("LeftHand")):m_position(self._unit:get_object(Idstring("Spine1")):position())
+						self._unit:get_object(Idstring("LeftHand")):set_position(self._unit:get_object(Idstring("Spine1")):position())
+						self._unit:get_object(Idstring("LeftHand")):set_rotation(self._unit:get_object(Idstring("Spine1")):rotation())
+					end
+					if part == "RightArm" then
+						self._unit:get_object(Idstring("RightArm")):m_position(bone_body4:position())
+						self._unit:get_object(Idstring("RightArm")):set_position(bone_body4:position())
+						self._unit:get_object(Idstring("RightArm")):set_rotation(bone_body4:rotation())
+						self._unit:get_object(Idstring("RightForeArm")):m_position(self._unit:get_object(Idstring("RightArm")):position())
+						self._unit:get_object(Idstring("RightForeArm")):set_position(self._unit:get_object(Idstring("RightArm")):position())
+						self._unit:get_object(Idstring("RightForeArm")):set_rotation(self._unit:get_object(Idstring("Spine1")):rotation())
+						self._unit:get_object(Idstring("RightHand")):m_position(self._unit:get_object(Idstring("Spine1")):position())
+						self._unit:get_object(Idstring("RightHand")):set_position(self._unit:get_object(Idstring("Spine1")):position())
+						self._unit:get_object(Idstring("RightHand")):set_rotation(self._unit:get_object(Idstring("Spine1")):rotation())
+					end
+					if part == "LeftLeg" then
+						self._unit:get_object(Idstring("LeftLeg")):m_position(bone_body:position())
+						self._unit:get_object(Idstring("LeftLeg")):set_position(bone_body:position())
+						self._unit:get_object(Idstring("LeftLeg")):set_rotation(bone_body:rotation())
+						self._unit:get_object(Idstring("LeftFoot")):m_position(self._unit:get_object(Idstring("Hips")):position())
+						self._unit:get_object(Idstring("LeftFoot")):set_position(self._unit:get_object(Idstring("Hips")):position())
+						self._unit:get_object(Idstring("LeftFoot")):set_rotation(self._unit:get_object(Idstring("Hips")):rotation())
+					end
+					if part == "RightLeg" then
+						self._unit:get_object(Idstring("RightLeg")):m_position(bone_body2:position())
+						self._unit:get_object(Idstring("RightLeg")):set_position(bone_body2:position())
+						self._unit:get_object(Idstring("RightLeg")):set_rotation(bone_body2:rotation())
+						self._unit:get_object(Idstring("RightFoot")):m_position(self._unit:get_object(Idstring("Hips")):position())
+						self._unit:get_object(Idstring("RightFoot")):set_position(self._unit:get_object(Idstring("Hips")):position())
+						self._unit:get_object(Idstring("RightFoot")):set_rotation(self._unit:get_object(Idstring("Hips")):rotation())
+					end
+				end
+			end
+		end
+	end )
+elseif string.lower(RequiredScript) == "lib/tweak_data/blackmarket/maskstweakdata" then
+	if not ShaveHUD:getSetting({"INVENTORY", "RETURNABLE_MASK_COMPONENTS"}, true) then
+		return
+	end
+	
+    local original_init_masks = BlackMarketTweakData._init_masks
+    function BlackMarketTweakData:_init_masks(tweak_data)
+        original_init_masks(self, tweak_data)
+        for _, mask in pairs(self.masks) do
+            mask.value = 0
+        end
+    end
+elseif string.lower(RequiredScript) == "lib/tweak_data/blackmarket/materialstweakdata" then
+	if not ShaveHUD:getSetting({"INVENTORY", "RETURNABLE_MASK_COMPONENTS"}, true) then
+		return
+	end
+	
+    local original_init_materials = BlackMarketTweakData._init_materials
+    function BlackMarketTweakData:_init_materials(tweak_data)
+        original_init_materials(self, tweak_data)
+        for _, material in pairs(self.materials) do
+            material.value = 0
+        end
+    end
+elseif string.lower(RequiredScript) == "lib/tweak_data/blackmarket/texturestweakdata" then
+	if not ShaveHUD:getSetting({"INVENTORY", "RETURNABLE_MASK_COMPONENTS"}, true) then
+		return
+	end
+	
+    local original_init_textures = BlackMarketTweakData._init_textures
+    function BlackMarketTweakData:_init_textures(tweak_data)
+        original_init_textures(self, tweak_data)
+        for _, texture in pairs(self.textures) do
+            texture.value = 0
+        end
+    end
+elseif string.lower(RequiredScript) == "lib/tweak_data/blackmarket/colorstweakdata" then
+	if not ShaveHUD:getSetting({"INVENTORY", "RETURNABLE_MASK_COMPONENTS"}, true) then
+		return
+	end
+	
+    local original_init_colors = BlackMarketTweakData._init_colors
+    function BlackMarketTweakData:_init_colors(tweak_data)
+        original_init_colors(self, tweak_data)
+        for _, color in pairs(self.colors) do
+            color.value = 0
+        end
+    end
+elseif string.lower(RequiredScript) == "lib/units/beings/player/states/playerstandard" then
+	if not ShaveHUD:getSetting({"Misc", "LADDER_IMPROVEMENTS"}, true) then
+		return
+	end
+
+    --too lazy to check which of these are actually needed, especially since i might need them again later if i change the mod
+    local mvec3_dis_sq = mvector3.distance_sq
+    local mvec3_set = mvector3.set
+    local mvec3_set_z = mvector3.set_z
+    local mvec3_sub = mvector3.subtract
+    local mvec3_add = mvector3.add
+    local mvec3_mul = mvector3.multiply
+    local mvec3_norm = mvector3.normalize
+
+    local temp_vec1 = Vector3()
+
+    local tmp_ground_from_vec = Vector3()
+    local tmp_ground_to_vec = Vector3()
+    local up_offset_vec = math.UP * 30
+    local down_offset_vec = math.UP * -40
+
+    local win32 = SystemInfo:platform() == Idstring("WIN32")
+
+    local mvec_pos_new = Vector3()
+    local mvec_achieved_walk_vel = Vector3()
+    local mvec_move_dir_normalized = Vector3()
+
+
+    local orig_check_jump = PlayerStandard._check_action_jump
+    function PlayerStandard:_check_action_jump(t, input)
+        if input.btn_jump_press then 
+            --don't need to check for action forbidden or cooldown, since this only applies to ladders
+            if self._state_data.ducking then 
+                --nothing
+            elseif self._state_data.on_ladder then
+                self:_interupt_action_ladder(t)
+                return --this is the only thing i've really changed: no jumping on ladders >:(
+            end
+        end
+        return orig_check_jump(self,t,input)
+    end
+
+    function PlayerStandard:_check_action_ladder(t, input)
+            local downed = self._controller:get_any_input() --input.downed
+            local hold_jump = downed and self._controller:get_input_bool("jump")
+            local release_jump = released and self._controller:get_input_released("jump")
+            local hold_duck = downed and self._controller:get_input_bool("duck")
+            
+        if self._state_data.on_ladder then
+            local ladder_unit = self._unit:movement():ladder_unit()
+            
+            if not hold_jump and ladder_unit:ladder():check_end_climbing(self._unit:movement():m_pos(), self._normal_move_dir, self._gnd_ray) then
+                self:_end_action_ladder(t,input) --doesn't really need any arguments but just in case some other modder wants to do something with that
+                return
+            elseif hold_jump then 
+                self:_end_action_ladder(t,input)
+                return
+            end
+
+            if hold_duck and self._unit:mover() then
+                self._unit:mover():set_gravity(Vector3(0, 0, -982))
+                return
+            elseif input.btn_duck_release and self._unit:mover() then
+                self._unit:mover():set_gravity(Vector3(0,0,0))
+                self._unit:mover():set_velocity(Vector3())
+            end
+
+        elseif hold_jump then 
+            return --if hold jump, don't try to detect ladders + start climbing
+        end
+
+        local u_pos = self._unit:movement():m_pos()
+        local ladder_unit
+
+        for i = 1, math.min(Ladder.LADDERS_PER_FRAME, #Ladder.active_ladders), 1 do
+            ladder_unit = Ladder.next_ladder()
+
+            if alive(ladder_unit) then
+
+                local can_access = ladder_unit:ladder():can_access(u_pos, self._move_dir or self._ext_camera:forward())
+                --if not moving (self._move_dir) then check for valid ladder positions using camera direction
+                --this way, player will automatically grab any ladder that they are facing
+                --TACTICOOL REALISM WINS AGAIN WOOOO
+                if can_access then
+                    self:_start_action_ladder(t, ladder_unit)
+                    break
+                end
+            end
+        end
+    end
 end
