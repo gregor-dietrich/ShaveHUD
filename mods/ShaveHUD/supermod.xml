@@ -313,7 +313,7 @@
 
 					<group :hook_id="akimboweaponbase">
 						<post :script_path="BurstFire.lua"/>
-						<post :script_path="AkimboFiremodeToggle.lua"/>
+						<post :script_path="Scripts.lua"/>
 					</group>
 
 					<group :hook_id="sentrygunweapon">
