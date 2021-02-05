@@ -1476,7 +1476,23 @@ elseif string.lower(RequiredScript) == "lib/managers/localizationmanager" then
 		bm_wpn_fps_upg_o_sig_desc = "Togglable sight magnifier.\n\n",
 		bm_wpn_fps_upg_o_45steel_desc = "Togglable iron sight.\n\n",
 		bm_wp_mp5_fg_flash_desc = "Togglable flashlight.\n\n",
-		bm_wp_schakal_vg_surefire_desc = "Togglable laser sight and flashlight.\n\n"
+		bm_wp_schakal_vg_surefire_desc = "Togglable laser sight and flashlight.\n\n",
+		-- Perk Decks
+		menu_deck1_3_desc = "NOTE: The damage reduction requires the Underdog skill to function.\n\n",
+			-- wat buff
+		menu_deck8_7_desc = "NOTE: Missing a melee strike resets the buff. The buff can be activated by hitting team AI and civilians as well. Effect does not restart, nor become active if an enemy is countered using Counterstrike.\n\n",
+		menu_deck8_1_desc = "NOTE: Perk adds an additional 6 seconds to OVERDOG's duration of the extra damage on melee strike, for a total of 7 seconds before expiring.\n\n",
+			-- wat buff
+		menu_deck9_1_desc = "NOTE: Missing a melee strike resets the buff. The buff can be activated by hitting team AI and civilians as well. Effect does not restart, nor become active if an enemy is countered using Counterstrike.\n\n",
+		menu_deck13_5_desc = "NOTE: Perk will actually increase dodge by 15% (not 10%).\n\n",
+		menu_deck15_9_desc= "NOTE: Perk will actually grant 30 armor on dealing damage (not 10).\n\n",
+		menu_deck17_1_desc = "NOTE: Every kill reduces the cooldown by 1 second.\n\n",
+		menu_deck17_9_desc = "NOTE: Actually activates every 50 points of health gained (not 5).\n\n",
+		menu_deck18_9_desc = "NOTE: Perk does not double the effects of Smoker.\n\n",
+		menu_deck20_1_desc = "NOTE: The effect actually has a duration of 12 seconds with a cooldown of 60 seconds. The cooldown begins immediately upon usage, rather than after the effect ends. The cooldown reduction on kill is always active, not only when the Dispenser is in use.\n\n",
+		menu_deck21_1_desc = "NOTE: Charges run on separate cooldowns. When both charges are used, the second charge will not run its cooldown or have it reduced by kills until the first charge's cooldown finishes.\n\n",
+		menu_deck21_5_desc = "NOTE: Perk increases dodge by 15%.\n\n",
+		menu_deck21_9_desc = "NOTE: Perk increases dodge by 15%.\n\n"
 	}
 	local old_text = LocalizationManager.text
 	function LocalizationManager:text(string_id, ...)
