@@ -4159,7 +4159,7 @@ if ShaveHUD then
 				type = "menu",
 				menu_id = "shavehud_fixes_options_menu",
 				name_id = "shavehud_fixes_options_name",
-				desc_id = "shavehud_fixes_options_help",
+				desc_id = "",
 				options = {
 					{
 						type = "toggle",
@@ -4298,7 +4298,7 @@ if ShaveHUD then
 				type = "menu",
 				menu_id = "shavehud_misc_options_menu",
 				name_id = "shavehud_misc_options_name",
-				desc_id = "shavehud_misc_options_help",
+				desc_id = "",
 				options = {
 					{
 						type = "toggle",
