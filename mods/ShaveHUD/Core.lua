@@ -115,6 +115,7 @@ if not _G.ShaveHUD then
 			},
 			EnemyHealthbar = {
 				FLOATING_ENABLED 						= true,		--Show floating health bars
+				FLOATING_CUSTOM_FIX						= true,		--Fix for custom health textures
 				ENABLED 								= false,	--Show classic health bars
 				SHOW_CIVILIAN 							= false,	--Show Healthbars for Civilians and TeamAI
 				SHOW_VEHICLE							= true,		--Show Healthbar for vehicles

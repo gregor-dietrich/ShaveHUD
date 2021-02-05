@@ -1471,6 +1471,16 @@ if ShaveHUD then
 								value = {"EnemyHealthbar", "FLOATING_ENABLED"},
 							},
 							{
+								type = "toggle",
+								name_id = "shavehud_fhb_custom_fix_title",
+								desc_id = "shavehud_fhb_custom_fix_desc",
+								visible_reqs = {},
+								enabled_reqs = {
+									{ setting = { "EnemyHealthbar", "FLOATING_ENABLED" }, invert = false }
+								},
+								value = {"EnemyHealthbar", "FLOATING_CUSTOM_FIX"},
+							},
+							{
 								type = "divider",
 								size = 16,
 							},
