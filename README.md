@@ -19,7 +19,7 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/13463
 - **Bullet Dismemberment** by Undeadsewer, updated by test1 & Dr_Newbie
 	- https://modwork.shop/30587
-- **Cheater Kicker** by Sora
+- **Cheater Kicker** by Sora, updated by Takku (me)
 	- https://modwork.shop/21487
 - **Clear Descriptions** by Vectis, updated by Takku (me)
 	- https://modwork.shop/19548
@@ -37,7 +37,7 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/19837
 - **Crimespree Phalanx Spawn Limit Fix** by Rokk
 	- https://modwork.shop/20473
-- **Custom Vehicle FOV** by Takku (me)
+- **Custom Vehicle FOV** by Bunsena, rewritten by Takku (me)
 	- https://modwork.shop/20640
 - **Deathwish Skull Loot Bag** by Dave The Ripper
 	- https://modwork.shop/13499
@@ -55,7 +55,7 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/19607
 - **DrivingHUD** by ViciousWalrus and Great Big Bushy Beard, rewritten by Kamikaze94
 	- https://modwork.shop/12982
-- **Floating Health Bars** by BangL
+- **Floating Health Bars** by BangL, updated by Takku (me)
 	- https://modwork.shop/20330
 - **Hawk's Complete Soundpack** by Hawk
 	- https://modwork.shop/1529
@@ -145,7 +145,7 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/22662
 - **WeaponGadgets** by Seven
 	- https://bitbucket.org/pjal3urb/gadgets
-- **WolfHUD** by Kamikaze94
+- **WolfHUD** by Kamikaze94, modified by Takku (me)
 	- https://github.com/Kamikaze94/WolfHUD
 	- **AdvAssault** (based on HoxHUD P4.1)
 	- **Angled Sight Visualisation** (based on HoxHUD P4.1)
