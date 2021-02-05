@@ -20,20 +20,6 @@
 			"hook_id" : "lib/entry", "script_path" : "Core.lua"
 		}
 	],
-	"hooks": [
-		{
-			"hook_id": "core/lib/managers/controller/corecontrollerwrapperpc",
-			"script_path": "lua/NumpadEnterConfirm/corecontrollerwrapperpc.lua"
-		},
-		{
-			"hook_id": "lib/managers/chatmanager",
-			"script_path": "lua/NumpadEnterConfirm/chatmanager.lua"
-		},
-		{
-			"hook_id": "lib/managers/hud/hudchat",
-			"script_path": "lua/NumpadEnterConfirm/hudchat.lua"
-		}
-	],
 	"keybinds": [
 		{
 			"keybind_id" : "Akimbo_Toggle",

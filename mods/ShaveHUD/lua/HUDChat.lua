@@ -536,6 +536,16 @@ if RequiredScript == "lib/managers/hud/hudchat" then
 		self:update_caret()
 	end
 
+	dofile(ModPath .. "lua/Utils/NumpadEnter.lua")
+	local key_press_actual = HUDChat.key_press
+		function HUDChat:key_press(...)
+		key_press_actual(self, unpack(NumpadEnterConfirm_RemapNumpadEnter(...)))
+	end
+	local key_release_actual = HUDChat.key_release
+		function HUDChat:key_release(...)
+		key_release_actual(self, unpack(NumpadEnterConfirm_RemapNumpadEnter(...)))
+	end
+
 	function HUDChat:_change_line_offset(diff)
 		if diff ~= 0 then
 			self:_set_line_offset(math.clamp(self._current_line_offset + diff, 0, math.max(self._total_message_lines - HUDChat.MAX_OUTPUT_LINES + self._current_input_lines - 1, 0)))

@@ -384,6 +384,7 @@
 		<group hook_id="core/lib/managers/">
 			<post :hook_id="menu/items/coremenuitemslider" :script_path="MenuTweaks.lua"/>
 			<post :hook_id="subtitle/coresubtitlepresenter" :script_path="EnhancedObjective.lua"/>
+			<post :hook_id="controller/corecontrollerwrapperpc" :script_path="MenuTweaks"/>
 		</group>
 	</hooks>
 

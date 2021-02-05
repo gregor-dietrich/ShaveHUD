@@ -1101,6 +1101,23 @@ elseif string.lower(RequiredScript) == "lib/managers/crimenetmanager" then
 		-- Assign job pos per difficulty?
 		return _get_job_location_orig(self, data, ...)
 	end
+elseif string.lower(RequiredScript) == "core/lib/managers/controller/corecontrollerwrapperpc" then
+	core:module("CoreControllerWrapperPC")
+	core:import("CoreControllerWrapper")
+
+	-- Ergh, I have to put this here as dofile() does not work properly for this file
+	local function table_pack(...)
+		return {n = select("#", ...), ...}
+	end
+
+	local virtual_connect_confirm_actual = ControllerWrapperPC.virtual_connect_confirm
+	function ControllerWrapperPC:virtual_connect_confirm(...)
+		virtual_connect_confirm_actual(self, ...)
+
+		local args = table_pack(...)
+		args[3] = "num enter"
+		self:virtual_connect2(unpack(args))
+	end
 elseif string.lower(RequiredScript) == "core/lib/managers/menu/items/coremenuitemslider" then
 	core:module("CoreMenuItemSlider")
 	--core:import("CoreMenuItem")
@@ -1288,6 +1305,16 @@ elseif string.lower(RequiredScript) == "lib/managers/menu/renderers/menunodeskil
 		end
 	end
 elseif string.lower(RequiredScript) == "lib/managers/chatmanager" then
+	dofile(ModPath .. "lua/utils/NumpadEnter.lua")
+	local key_release_actual = ChatGui.key_release
+	function ChatGui:key_release(...)
+		key_release_actual(self, unpack(NumpadEnterConfirm_RemapNumpadEnter(...)))
+	end
+	local key_press_actual = ChatGui.key_press
+	function ChatGui:key_press(...)
+		key_press_actual(self, unpack(NumpadEnterConfirm_RemapNumpadEnter(...)))
+	end
+
 	if not ShaveHUD:getSetting({"HUDChat", "SPAM_FILTER"}, true) then return end
 	ChatManager._SUB_TABLE = {
 		[utf8.char(57364)] = "<SKULL>",	--Skull icon
