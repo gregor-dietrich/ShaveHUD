@@ -252,12 +252,18 @@ function FloatingHealthBar:_make()
 		x = 0,
 		y = 0
 	})
+	local x_val = m
+	local radius_val = size / 2
+	if ShaveHUD:getSetting({"EnemyHealthbar", "FLOATING_CUSTOM_FIX"}, true) then
+		x_val = -14
+		radius_val = size
+	end
 	self.pie = CircleBitmapGuiObject:new(pnl, {
 		use_bg = false,
-		x = -14,
+		x = x_val,
 		y = m,
 		image = texture,
-		radius = size,
+		radius = radius_val,
 		sides = 64,
 		current = 20,
 		total = 64,
