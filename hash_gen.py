@@ -43,7 +43,7 @@ mods = [
     "./assets/mod_overrides/ShaveHUD Assets",
     "./assets/mod_overrides/ShaveHUD Extras",
     "../../../../Program Files (x86)/Steam/steamapps/common/PAYDAY 2/assets/mod_overrides/Hawk's Complete Soundpack",
-    "./mods/ShaveHUD"
+    "../../../../Program Files (x86)/Steam/steamapps/common/PAYDAY 2/mods/ShaveHUD"
 ]
 
 for mod_path in mods:
