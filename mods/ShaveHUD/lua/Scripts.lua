@@ -413,11 +413,11 @@ elseif string.lower(RequiredScript) == "lib/managers/mission/elementspawnenemydu
 	end
 elseif string.lower(RequiredScript) == "lib/network/base/networkpeer" then
 	if ShaveHUD:getSetting({"CrewLoadout", "AUTOKICK_CHEAT_MODS"}, true) then
-		Hooks:PostHook(NetworkPeer, "set_ip_verified", "cheaterz_go_to_hell_haha", function(self, state)
+		Hooks:PostHook(NetworkPeer, "set_ip_verified", "autokick_cheaters", function(self, state)
 			if not Network:is_server() then
 				return
 			end
-			DelayedCalls:Add( "cheaterz_go_to_hell_d", 2, function()
+			DelayedCalls:Add( "autokick_cheater", 2, function()
 				local user = Steam:user(self:ip())
 				if user and user:rich_presence("is_modded") == "1" or self:is_modded() then
 					managers.chat:feed_system_message(1, self:name() .. " HAS MODS! Checking...")
@@ -438,7 +438,13 @@ elseif string.lower(RequiredScript) == "lib/network/base/networkpeer" then
 							"overkill mod",
 							"selective dlc unlocker",
 							"the great skin unlock",
-							"beyond cheats"
+							"beyond cheats",
+							"fuck the flashbangs",
+							"unhittable armour",
+							"nokick4u",
+							"instant overdrill",
+							"texturei",
+							"ultimate trainer 4"
 						}
 		
 						for _, v in pairs(kick_on) do
@@ -467,7 +473,10 @@ elseif string.lower(RequiredScript) == "lib/network/base/networkpeer" then
 							"carry stacker",
 							"god",
 							"x-ray",
-							"mvp"
+							"mvp",
+							"rebalance",
+							"cook faster",
+							"no pager on domination"
 						}
 		
 						for k, pc in pairs(potential_hax) do

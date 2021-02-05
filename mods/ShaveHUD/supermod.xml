@@ -175,7 +175,7 @@
 			</group>
 
 			<group :hook_id="modifiers/">
-				<post :hook_id="modifiershieldphalanx" :script_path="FixTheGame.lua"/>
+				<post :hook_id="modifiershieldphalanx" :script_path="Fixes.lua"/>
 
 				<group :hook_id="boosts/">
 					<post :hook_id="gagemodifiermeleeinvincibility" :script_path="GameInfoManager.lua"/>
@@ -184,11 +184,11 @@
 			</group>
 
 			<group :hook_id="network/">
-				<post :hook_id="matchmaking/networkmatchmakingsteam" :script_path="FixTheGame.lua"/>
+				<post :hook_id="matchmaking/networkmatchmakingsteam" :script_path="Fixes.lua"/>
 
 				<group :hook_id="base/">
 					<post :hook_id="basenetworksession" :script_path="Scripts.lua"/>
-					<post :hook_id="hostnetworksession" :script_path="FixTheGame.lua"/>
+					<post :hook_id="hostnetworksession" :script_path="Fixes.lua"/>
 					<post :hook_id="networkpeer" :script_path="Scripts.lua"/>
 				</group>
 
@@ -213,10 +213,10 @@
 				</group>
 
 				<group :hook_id="enemies/">
-					<post :hook_id="tank/logics/tankcoplogicattack" :script_path="FixTheGame.lua"/>
+					<post :hook_id="tank/logics/tankcoplogicattack" :script_path="Fixes.lua"/>
 					
 					<group :hook_id="cop/">
-						<post :hook_id="copinventory" :script_path="ShieldDespawnTimer.lua"/>
+						<post :hook_id="copinventory" :script_path="Scripts.lua"/>
 						<post :hook_id="copmovement" :script_path="Scripts.lua"/>
 
 						<group :hook_id="copdamage">
@@ -325,7 +325,7 @@
 					<group :hook_id="raycastweaponbase">
 						<post :script_path="Scripts.lua"/>
 						<post :script_path="WeaponGadgets.lua"/>
-						<post :script_path="FixTheGame.lua"/>
+						<post :script_path="Fixes.lua"/>
 					</group>
 
 					<group :hook_id="newraycastweaponbase">
@@ -363,11 +363,11 @@
 				<post :hook_id="guitweakdata" :script_path="MenuTweaks.lua"/>
 				<post :hook_id="timespeedeffecttweakdata" :script_path="Scripts.lua"/>
 				<post :hook_id="economytweakdata" :script_path="Scripts.lua"/>
-				<post :hook_id="crimespreetweakdata" :script_path="FixTheGame.lua"/>
+				<post :hook_id="crimespreetweakdata" :script_path="Fixes.lua"/>
 				<post :hook_id="interactiontweakdata" :script_path="Interaction.lua"/>
 				<post :hook_id="playertweakdata" :script_path="Scripts.lua"/>
 				<post :hook_id="lootdroptweakdata" :script_path="Scripts.lua"/>
-				<post :hook_id="vehicletweakdata" :script_path="CustomVehicleFOV.lua"/>
+				<post :hook_id="vehicletweakdata" :script_path="Scripts.lua"/>
 				<post :hook_id="weaponfactorytweakdata" :script_path="Scripts.lua"/>
 				<post :hook_id="weapontweakdata" :script_path="Scripts.lua"/>
 				<post :hook_id="levelstweakdata" :script_path="Scripts.lua"/>
