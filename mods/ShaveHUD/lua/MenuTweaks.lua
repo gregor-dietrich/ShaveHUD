@@ -1479,11 +1479,9 @@ elseif string.lower(RequiredScript) == "lib/managers/localizationmanager" then
 		bm_wp_schakal_vg_surefire_desc = "Togglable laser sight and flashlight.\n\n",
 		-- Perk Decks
 		menu_deck1_3_desc = "NOTE: The damage reduction requires the Underdog skill to function.\n\n",
-			-- wat buff
-		menu_deck8_7_desc = "NOTE: Missing a melee strike resets the buff. The buff can be activated by hitting team AI and civilians as well. Effect does not restart, nor become active if an enemy is countered using Counterstrike.\n\n",
+		menu_deck8_7_desc = "NOTE: Missing a melee strike resets the damage buff. The buff can be activated by hitting team AI and civilians as well. Effect does not restart, nor become active if an enemy is countered using Counterstrike.\n\n",
 		menu_deck8_1_desc = "NOTE: Perk adds an additional 6 seconds to OVERDOG's duration of the extra damage on melee strike, for a total of 7 seconds before expiring.\n\n",
-			-- wat buff
-		menu_deck9_1_desc = "NOTE: Missing a melee strike resets the buff. The buff can be activated by hitting team AI and civilians as well. Effect does not restart, nor become active if an enemy is countered using Counterstrike.\n\n",
+		menu_deck9_1_desc = "NOTE: Missing a melee strike resets the damage buff. The buff can be activated by hitting team AI and civilians as well. Effect does not restart, nor become active if an enemy is countered using Counterstrike.\n\n",
 		menu_deck13_5_desc = "NOTE: Perk will actually increase dodge by 15% (not 10%).\n\n",
 		menu_deck15_9_desc= "NOTE: Perk will actually grant 30 armor on dealing damage (not 10).\n\n",
 		menu_deck17_1_desc = "NOTE: Every kill reduces the cooldown by 1 second.\n\n",
