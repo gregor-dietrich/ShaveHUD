@@ -1726,16 +1726,6 @@ elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copinventory" then
 			end
 		end)
 	end
-elseif string.lower(RequiredScript) == "lib/units/enemies/cop/actions/full_body/copactionhurt" then
-	if not ShaveHUD:getSetting({"Misc", "ALWAYS_RAGDOLL"}, true) then
-		return
-	end
-	function CopActionHurt:_freeze_ragdoll()
-		self._root_act_tags = {}
-		if self._unit:damage() and self._unit:damage():has_sequence("freeze_ragdoll") and managers.groupai:state():whisper_mode() then
-			self._unit:damage():run_sequence_simple("freeze_ragdoll")
-		end
-	end
 elseif string.lower(RequiredScript) == "lib/units/weapons/newraycastweaponbase" then
 	if not ShaveHUD:getSetting({"Misc", "AKIMBO_ANIMATIONS"}, true) then
 		return

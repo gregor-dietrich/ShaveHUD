@@ -512,7 +512,6 @@ if not _G.ShaveHUD then
 			},
 			Misc = {
 				AKIMBO_ANIMATIONS						= true,
-				ALWAYS_RAGDOLL							= true,
 				BADASS_CAMERA							= true,
 				BULLET_DECAPITATIONS					= true,
 				DIFFICULTY_ANIMATION					= true,
@@ -522,7 +521,6 @@ if not _G.ShaveHUD then
 				INSTANT_CUSTODY							= true,
 				KICK_FRIEND								= true,
 				LADDER_IMPROVEMENTS						= true,
-				--TO DO MISSION_INTROS							= true,
 				MOD_LIST_LITE							= true,
 				NO_BAG_TILT								= true,
 				NO_FADE									= true,

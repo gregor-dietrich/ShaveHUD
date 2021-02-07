@@ -4359,13 +4359,6 @@ if ShaveHUD then
 					},
 					{
 						type = "toggle",
-						name_id = "shavehud_always_ragdoll_title",
-						desc_id = "shavehud_always_ragdoll_desc",
-						value = {"Misc", "ALWAYS_RAGDOLL"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					{
-						type = "toggle",
 						name_id = "shavehud_badass_camera_title",
 						desc_id = "shavehud_badass_camera_desc",
 						value = {"Misc", "BADASS_CAMERA"},
@@ -4455,15 +4448,6 @@ if ShaveHUD then
 						value = {"Misc", "LADDER_IMPROVEMENTS"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--[[ TO DO
-					{
-						type = "toggle",
-						name_id = "shavehud_mission_intros_title",
-						desc_id = "shavehud_mission_intros_desc",
-						value = {"Misc", "MISSION_INTROS"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					--]]
 					{
 						type = "toggle",
 						name_id = "shavehud_mod_list_lite_title",
