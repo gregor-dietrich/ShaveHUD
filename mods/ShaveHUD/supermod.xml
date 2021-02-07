@@ -35,13 +35,18 @@
 				<post :hook_id="preplanningmanager" :script_path="PrePlanManager.lua"/>
 				<post :hook_id="platformmanager" :script_path="RichPresence.lua"/>
 				<post :hook_id="skirmishmanager" :script_path="RichPresence.lua"/>
-				<post :hook_id="enemymanager" :script_path="GameInfoManager.lua"/>
 				<post :hook_id="systemmenumanager" :script_path="Utils/InputDialog.lua"/>
 				<post :hook_id="dialogs/specializationdialog" :script_path="Utils/InputDialog.lua"/>
 				<post :hook_id="player/smokescreeneffect" :script_path="GameInfoManager.lua"/>
 				<post :hook_id="mission/elementfilter" :script_path="Scripts.lua"/>
 				<post :hook_id="mission/elementspawnenemydummy" :script_path="Scripts.lua"/>
 				<post :hook_id="criminalsmanager" :script_path="Scripts.lua"/>
+
+				
+				<group :hook_id="enemymanager">
+					<post :script_path="GameInfoManager.lua"/>
+					<post :script_path="Fixes.lua"/>
+				</group>
 
 				<group :hook_id="localizationmanager">
 					<post :script_path="AdvAssault.lua"/>
@@ -223,7 +228,11 @@
 					<group :hook_id="cop/">
 						<post :hook_id="actions/full_body/copactionhurt" :script_path="Scripts.lua"/>
 						<post :hook_id="copinventory" :script_path="Scripts.lua"/>
-						<post :hook_id="copmovement" :script_path="Scripts.lua"/>
+
+						<group :hook_id="copmovement">
+							<post :script_path="Scripts.lua"/>
+							<post :script_path="Fixes.lua"/>
+						</group>
 
 						<group :hook_id="copdamage">
 							<post :script_path="GameInfoManager.lua"/>
@@ -244,8 +253,13 @@
 				<group :hook_id="beings/player/">
 					<post :hook_id="playermovement" :script_path="GameInfoManager.lua"/>
 					<post :hook_id="playerinventory" :script_path="GameInfoManager.lua"/>
-					<post :hook_id="huskplayermovement" :script_path="DownCounter.lua"/>
 					<post :hook_id="huskplayerdamage" :script_path="Scripts.lua"/>
+
+					
+					<group :hook_id="huskplayermovement">
+						<post :script_path="DownCounter.lua"/>
+						<post :script_path="Fixes.lua"/>
+					</group>
 
 					<group :hook_id="playerdamage">
 						<post :script_path="GameInfoManager.lua"/>
@@ -390,7 +404,7 @@
 		<group hook_id="core/lib/managers/">
 			<post :hook_id="menu/items/coremenuitemslider" :script_path="MenuTweaks.lua"/>
 			<post :hook_id="subtitle/coresubtitlepresenter" :script_path="EnhancedObjective.lua"/>
-			<post :hook_id="controller/corecontrollerwrapperpc" :script_path="MenuTweaks"/>
+			<post :hook_id="controller/corecontrollerwrapperpc" :script_path="MenuTweaks.lua"/>
 		</group>
 	</hooks>
 

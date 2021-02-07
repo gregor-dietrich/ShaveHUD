@@ -4247,15 +4247,23 @@ if ShaveHUD then
 						value = {"Fixes", "CRIMESPREE_RANKSPREAD_FILTER"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--[[ TO DO
 					{
 						type = "toggle",
-						name_id = "shavehud_mission_intros_title",
-						desc_id = "shavehud_mission_intros_desc",
+						name_id = "shavehud_fix_mag_drop_title",
+						desc_id = "shavehud_fix_mag_drop_desc",
 						value = {"Fixes", "MAG_DROP"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--]]
+					{
+						type = "slider",
+						name_id = "shavehud_fix_mag_drop_limit_title",
+						desc_id = "shavehud_fix_mag_drop_limit_desc",
+						value = {"Fixes", "MAG_DROP_LIMIT"},
+						visible_reqs = {}, enabled_reqs = {},
+						min_value = 0,
+						max_value = 2048,
+						step_size = 1,
+					},
 					{
 						type = "toggle",
 						name_id = "shavehud_fix_bullet_push_title",
