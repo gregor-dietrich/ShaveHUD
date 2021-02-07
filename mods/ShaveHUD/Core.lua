@@ -185,7 +185,6 @@ if not _G.ShaveHUD then
 				SKIN_HIDER								= true,
 				AUTOKICK_CHEAT_MODS						= true,
 				IDENTIFY_VR								= true,
-				--TO DO PEER_MOD_DISPLAY						= true,
 			},
 			HUDList = {
 				ENABLED	 								= true,
@@ -517,7 +516,6 @@ if not _G.ShaveHUD then
 				BULLET_DECAPITATIONS					= true,
 				DIFFICULTY_ANIMATION					= true,
 				DISABLE_TELEMETRY						= true,
-				--TO DO FORCE_START								= true,
 				HIDDEN_DLC								= true,
 				HIDDEN_UPDATES							= true,
 				INSTANT_CUSTODY							= true,

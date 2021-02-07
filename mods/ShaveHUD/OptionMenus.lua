@@ -3414,15 +3414,6 @@ if ShaveHUD then
 						value = {"CrewLoadout", "AUTOKICK_CHEAT_MODS"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--[[ TO DO
-					{
-						type = "toggle",
-						name_id = "shavehud_peer_mod_display_title",
-						desc_id = "shavehud_peer_mod_display_desc",
-						value = {"CrewLoadout", "PEER_MOD_DISPLAY"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					]]--
 					{
 						type = "toggle",
 						name_id = "shavehud_skin_hider_title",
@@ -4256,6 +4247,15 @@ if ShaveHUD then
 						value = {"Fixes", "CRIMESPREE_RANKSPREAD_FILTER"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
+					--[[ TO DO
+					{
+						type = "toggle",
+						name_id = "shavehud_mission_intros_title",
+						desc_id = "shavehud_mission_intros_desc",
+						value = {"Fixes", "MAG_DROP"},
+						visible_reqs = {}, enabled_reqs = {},
+					},
+					--]]
 					{
 						type = "toggle",
 						name_id = "shavehud_fix_bullet_push_title",
@@ -4421,15 +4421,6 @@ if ShaveHUD then
 						value = {"Misc", "KICK_FRIEND"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--[[ TO DO
-					{
-						type = "toggle",
-						name_id = "shavehud_force_start_title",
-						desc_id = "shavehud_force_start_desc",
-						value = {"Misc", "FORCE_START"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					]]--
 					{
 						type = "toggle",
 						name_id = "shavehud_hidden_dlc_title",
