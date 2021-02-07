@@ -2,6 +2,8 @@
 Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 different authors.
 
 # Included Mods
+- **Akimbo Animation Tweaks** by Zdann
+	- https://modwork.shop/22472
 - **Akimbo Firemode Toggle** by Llamageddon
 	- https://modwork.shop/20268
 - **Auto-Discard Parachute** by Snh20
@@ -63,6 +65,8 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/25942
 - **Hidden Content Updates** by Zdann
 	- https://modwork.shop/18476
+- **Identify VR Players** by Offyerrocker
+	- https://modwork.shop/23066
 - **Improved Offline Functionality** by fragtrane
 	- https://modwork.shop/25511
 - **Instant Cardflip** by Takku (me)
@@ -79,6 +83,8 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/15175
 - **Ladder Improvements** by Offyerrocker
 	- https://modwork.shop/23192
+- **Mag Drop Fixes** by Zdann
+	- https://modwork.shop/25768
 - **Map-Based Optimizations** by RedFlame
 	- https://modwork.shop/30521
 - **Metal Gear Solid Alert Sound** by Teacher Bun Bun
