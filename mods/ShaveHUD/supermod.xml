@@ -239,7 +239,7 @@
 					<post :hook_id="playermovement" :script_path="GameInfoManager.lua"/>
 					<post :hook_id="playerinventory" :script_path="GameInfoManager.lua"/>
 					<post :hook_id="huskplayermovement" :script_path="DownCounter.lua"/>
-					<post :hook_id="huskplayermovement" :script_path="Scripts.lua"/>
+					<post :hook_id="huskplayerdamage" :script_path="Scripts.lua"/>
 
 					<group :hook_id="playerdamage">
 						<post :script_path="GameInfoManager.lua"/>

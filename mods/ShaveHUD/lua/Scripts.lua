@@ -516,7 +516,6 @@ elseif string.lower(RequiredScript) == "lib/units/beings/player/huskplayerdamage
             managers.game_play_central:sync_play_impact_flesh(hit_pos, attack_dir)
         end)
     end
-	
 	if ShaveHUD:getSetting({"Misc", "LADDER_IMPROVEMENTS"}, true) then
 		local orig_damage = PlayerDamage.damage_fall
 		function PlayerDamage:damage_fall(...)
