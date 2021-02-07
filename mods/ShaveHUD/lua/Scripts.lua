@@ -1481,7 +1481,6 @@ elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copinventory" then
 	if not ShaveHUD:getSetting({"Misc", "SHIELD_DESPAWN_TIMER"}, true) then
 		return
 	end
-
 	local this = {
 		min_value = 3,
 		max_value = 12
@@ -1510,5 +1509,15 @@ elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copinventory" then
 				managers.enemy:add_delayed_clbk( "", clbk_hide, ShieldDespawnTimer:get_time() )
 			end
 		end)
+	end
+elseif string.lower(RequiredScript) == "lib/units/enemies/cop/actions/full_body/copactionhurt" then
+	if not ShaveHUD:getSetting({"Misc", "ALWAYS_RAGDOLL"}, true) then
+		return
+	end
+	function CopActionHurt:_freeze_ragdoll()
+		self._root_act_tags = {}
+		if self._unit:damage() and self._unit:damage():has_sequence("freeze_ragdoll") and managers.groupai:state():whisper_mode() then
+			self._unit:damage():run_sequence_simple("freeze_ragdoll")
+		end
 	end
 end

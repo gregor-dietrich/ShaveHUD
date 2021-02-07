@@ -216,6 +216,7 @@
 					<post :hook_id="tank/logics/tankcoplogicattack" :script_path="Fixes.lua"/>
 					
 					<group :hook_id="cop/">
+						<post :hook_id="actions/full_body/copactionhurt" :script_path="Scripts.lua"/>
 						<post :hook_id="copinventory" :script_path="Scripts.lua"/>
 						<post :hook_id="copmovement" :script_path="Scripts.lua"/>
 

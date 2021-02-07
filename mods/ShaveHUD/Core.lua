@@ -512,6 +512,7 @@ if not _G.ShaveHUD then
 			},
 			Misc = {
 				--TO DO AKIMBO_ANIMATIONS						= true,
+				ALWAYS_RAGDOLL							= true,
 				BADASS_CAMERA							= true,
 				BULLET_DECAPITATIONS					= true,
 				DIFFICULTY_ANIMATION					= true,

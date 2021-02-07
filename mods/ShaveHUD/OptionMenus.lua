@@ -4353,6 +4353,13 @@ if ShaveHUD then
 					--]]
 					{
 						type = "toggle",
+						name_id = "shavehud_always_ragdoll_title",
+						desc_id = "shavehud_always_ragdoll_desc",
+						value = {"Misc", "ALWAYS_RAGDOLL"},
+						visible_reqs = {}, enabled_reqs = {},
+					},
+					{
+						type = "toggle",
 						name_id = "shavehud_badass_camera_title",
 						desc_id = "shavehud_badass_camera_desc",
 						value = {"Misc", "BADASS_CAMERA"},
