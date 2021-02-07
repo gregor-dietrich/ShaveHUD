@@ -511,7 +511,7 @@ if not _G.ShaveHUD then
 				THIRD_PERSON_RECOIL						= true,
 			},
 			Misc = {
-				--TO DO AKIMBO_ANIMATIONS						= true,
+				AKIMBO_ANIMATIONS						= true,
 				ALWAYS_RAGDOLL							= true,
 				BADASS_CAMERA							= true,
 				BULLET_DECAPITATIONS					= true,

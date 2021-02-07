@@ -4249,23 +4249,6 @@ if ShaveHUD then
 					},
 					{
 						type = "toggle",
-						name_id = "shavehud_fix_mag_drop_title",
-						desc_id = "shavehud_fix_mag_drop_desc",
-						value = {"Fixes", "MAG_DROP"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					{
-						type = "slider",
-						name_id = "shavehud_fix_mag_drop_limit_title",
-						desc_id = "shavehud_fix_mag_drop_limit_desc",
-						value = {"Fixes", "MAG_DROP_LIMIT"},
-						visible_reqs = {}, enabled_reqs = {},
-						min_value = 0,
-						max_value = 2048,
-						step_size = 1,
-					},
-					{
-						type = "toggle",
 						name_id = "shavehud_fix_bullet_push_title",
 						desc_id = "shavehud_fix_bullet_push_desc",
 						value = {"Fixes", "BULLET_PUSH"},
@@ -4284,6 +4267,23 @@ if ShaveHUD then
 						desc_id = "shavehud_fix_keep_heist_outfits_desc",
 						value = {"Fixes", "KEEP_HEIST_OUTFITS"},
 						visible_reqs = {}, enabled_reqs = {},
+					},
+					{
+						type = "toggle",
+						name_id = "shavehud_fix_mag_drop_title",
+						desc_id = "shavehud_fix_mag_drop_desc",
+						value = {"Fixes", "MAG_DROP"},
+						visible_reqs = {}, enabled_reqs = {},
+					},
+					{
+						type = "slider",
+						name_id = "shavehud_fix_mag_drop_limit_title",
+						desc_id = "shavehud_fix_mag_drop_limit_desc",
+						value = {"Fixes", "MAG_DROP_LIMIT"},
+						visible_reqs = {}, enabled_reqs = {},
+						min_value = 0,
+						max_value = 2048,
+						step_size = 1,
 					},
 					{
 						type = "toggle",
@@ -4350,7 +4350,6 @@ if ShaveHUD then
 						type = "divider",
 						size = 8,
 					},
-					--[[ TO DO
 					{
 						type = "toggle",
 						name_id = "shavehud_akimbo_animations_title",
@@ -4358,7 +4357,6 @@ if ShaveHUD then
 						value = {"Misc", "AKIMBO_ANIMATIONS"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--]]
 					{
 						type = "toggle",
 						name_id = "shavehud_always_ragdoll_title",
