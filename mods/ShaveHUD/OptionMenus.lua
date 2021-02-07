@@ -3409,19 +3409,12 @@ if ShaveHUD then
 				options = {
 					{
 						type = "toggle",
-						name_id = "shavehud_skin_hider_title",
-						desc_id = "shavehud_skin_hider_desc",
-						value = {"CrewLoadout", "SKIN_HIDER"},
+						name_id = "shavehud_autokick_cheat_mods_title",
+						desc_id = "shavehud_autokick_cheat_mods_desc",
+						value = {"CrewLoadout", "AUTOKICK_CHEAT_MODS"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
 					--[[ TO DO
-					{
-						type = "toggle",
-						name_id = "shavehud_identify_vr_title",
-						desc_id = "shavehud_identify_vr_desc",
-						value = {"CrewLoadout", "IDENTIFY_VR"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
 					{
 						type = "toggle",
 						name_id = "shavehud_peer_mod_display_title",
@@ -3432,9 +3425,16 @@ if ShaveHUD then
 					]]--
 					{
 						type = "toggle",
-						name_id = "shavehud_autokick_cheat_mods_title",
-						desc_id = "shavehud_autokick_cheat_mods_desc",
-						value = {"CrewLoadout", "AUTOKICK_CHEAT_MODS"},
+						name_id = "shavehud_skin_hider_title",
+						desc_id = "shavehud_skin_hider_desc",
+						value = {"CrewLoadout", "SKIN_HIDER"},
+						visible_reqs = {}, enabled_reqs = {},
+					},
+					{
+						type = "toggle",
+						name_id = "shavehud_identify_vr_title",
+						desc_id = "shavehud_identify_vr_desc",
+						value = {"CrewLoadout", "IDENTIFY_VR"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
 					{

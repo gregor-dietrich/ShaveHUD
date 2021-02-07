@@ -188,8 +188,13 @@
 
 				<group :hook_id="base/">
 					<post :hook_id="basenetworksession" :script_path="Scripts.lua"/>
-					<post :hook_id="hostnetworksession" :script_path="Fixes.lua"/>
+					<post :hook_id="clientnetworksession" :script_path="Scripts.lua"/>
 					<post :hook_id="networkpeer" :script_path="Scripts.lua"/>
+
+					<group :hook_id="hostnetworksession">
+						<post :script_path="Fixes.lua"/>
+						<post :script_path="Scripts.lua"/>
+					</group>
 				</group>
 
 				<group :hook_id="handlers/unitnetworkhandler">

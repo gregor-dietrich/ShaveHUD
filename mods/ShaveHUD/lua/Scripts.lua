@@ -412,6 +412,14 @@ elseif string.lower(RequiredScript) == "lib/managers/mission/elementspawnenemydu
 		end
 	end
 elseif string.lower(RequiredScript) == "lib/network/base/networkpeer" then
+	if ShaveHUD:getSetting({"CrewLoadout", "IDENTIFY_VR"}, true) then
+		Hooks:PreHook(NetworkPeer,"set_is_vr","idvr_setvr",function(self)
+			if not self._is_vr then --if using posthook or without this check, always outputs the message twice. I don't like that.
+				managers.chat:_receive_message(1,"[ID_VR]", tostring(self._name) .. " is using VR!", Color('29FFC9'))
+			end
+		end)
+	end
+
 	if ShaveHUD:getSetting({"CrewLoadout", "AUTOKICK_CHEAT_MODS"}, true) then
 		Hooks:PostHook(NetworkPeer, "set_ip_verified", "autokick_cheaters", function(self, state)
 			if not Network:is_server() then
@@ -957,6 +965,22 @@ elseif string.lower(RequiredScript) == "lib/managers/hud/hudblackscreen" then
 			end)
 		end
 		self._blackscreen_panel:set_alpha(1)
+	end
+elseif string.lower(RequiredScript) == "lib/network/base/hostnetworksession" then
+	if ShaveHUD:getSetting({"CrewLoadout", "IDENTIFY_VR"}, true) then
+		Hooks:PostHook(HostNetworkSession, "on_peer_sync_complete", "host_informvr" , function(self, peer, peer_id)
+			if _G.IS_VR then
+				managers.chat:send_message( 1, managers.network:session():local_peer(), "I am using VR!")
+			end
+		end)
+	end
+elseif string.lower(RequiredScript) == "lib/network/base/clientnetworksession" then
+	if ShaveHUD:getSetting({"CrewLoadout", "IDENTIFY_VR"}, true) then
+		Hooks:PostHook(ClientNetworkSession,"on_peer_synched","client_informvr",function(self, peer_id, ...)
+			if _G.IS_VR then 
+				managers.chat:send_message( 1, managers.network:session():local_peer(), "I am using VR!" )
+			end
+		end)
 	end
 elseif string.lower(RequiredScript) == "lib/network/base/basenetworksession" then
 	if not ShaveHUD:getSetting({"Misc", "KICK_FRIEND"}, true) then

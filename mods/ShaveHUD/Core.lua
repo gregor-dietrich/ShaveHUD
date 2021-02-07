@@ -184,7 +184,7 @@ if not _G.ShaveHUD then
                 REPLACE_PROFILE_MENU                    = true,
 				SKIN_HIDER								= true,
 				AUTOKICK_CHEAT_MODS						= true,
-				--TO DO IDENTIFY_VR								= true,
+				IDENTIFY_VR								= true,
 				--TO DO PEER_MOD_DISPLAY						= true,
 			},
 			HUDList = {
