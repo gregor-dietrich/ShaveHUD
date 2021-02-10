@@ -135,6 +135,12 @@ Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 differen
 	- https://modwork.shop/18129
 - **Skip Blackscreen** by Seven
 	- https://modwork.shop/13511
+- **Slightly Exaggerated FPS Muzzleflashes** by fuglore
+	- https://modwork.shop/26054
+- **Slightly Exaggerated 3rd-Person Muzzleflashes** by fuglore
+	- https://modwork.shop/25764
+- **Slightly Exaggerated Weapon Tracers** by fuglore
+	- https://modwork.shop/25476
 - **Stale Lobby Fix** by Snh20
 	- https://modwork.shop/15540
 - **Starring** by Sora
