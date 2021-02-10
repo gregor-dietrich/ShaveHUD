@@ -38,7 +38,8 @@ if string.lower(RequiredScript) == "lib/units/weapons/raycastweaponbase" then
 			["m134"] = true,
 			["mg42"] = true,
 			["shuno"] = true,
-			["system"] = true
+			["system"] = true,
+			["par"] = true
 		}
 
 		--Allows users/modders to easily edit this blacklist from outside of this mod
@@ -63,7 +64,6 @@ if string.lower(RequiredScript) == "lib/units/weapons/raycastweaponbase" then
 			--Weapons on this list will play their sound as normal
 			-- either due to being an unconventional weapon (saw, flamethrower, other saw, other flamethrower), or lacking a singlefire sound (minigun, mg42, other minigun).
 		--I could define this in the function but meh	
-			
 
 		--Check for if AFSF's fix code should apply to this particular weapon
 		function RaycastWeaponBase:_soundfix_should_play_normal()
@@ -77,6 +77,8 @@ if string.lower(RequiredScript) == "lib/units/weapons/raycastweaponbase" then
 			elseif AutoFireSoundFixBlacklist[name_id] then
 				--blacklisted sound
 				return true
+		--	elseif self:gadget_overrides_weapon_functions() then 
+		--		return true
 			elseif not self:weapon_tweak_data().sounds.fire_single then
 				--no singlefire sound; should play normal
 				return true
@@ -96,8 +98,8 @@ if string.lower(RequiredScript) == "lib/units/weapons/raycastweaponbase" then
 		--Play sounds here instead for fix-applicable weapons; or else if blacklisted, use original function and don't play the fixed single-fire sound
 		--U200: there goes AFSF2's compatibility with other mods
 		Hooks:PreHook(RaycastWeaponBase,"fire","autofiresoundfix2_raycastweaponbase_fire",function(self,...)
-			self._bullets_fired = 0
 			if not self:_soundfix_should_play_normal() then
+				self._bullets_fired = 0
 				self:play_tweak_data_sound(self:weapon_tweak_data().sounds.fire_single,"fire_single")
 			end
 		end)
