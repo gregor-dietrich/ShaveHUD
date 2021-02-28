@@ -1,0 +1,13 @@
+<unit type="wpn" slot="1" >
+	<object file="units/pd2_dlc_osa/weapons/wpn_fps_smg_x_erma/wpn_fps_smg_x_erma" />
+	<dependencies>
+		<depends_on bnk="soundbanks/weapon_erma_x"/>
+		<depends_on bnk="soundbanks/weapon_erma"/>
+	</dependencies>
+    <extensions>
+        <extension class="ScriptUnitData" name="unit_data" />
+        <extension class="AkimboWeaponBase" name="base" >
+			<var name="name_id" value="x_erma" />
+		</extension>
+    </extensions>
+</unit>

@@ -73,21 +73,34 @@ if string.lower(RequiredScript) == "lib/managers/hudmanagerpd2" then
 		end
 	end
 elseif string.lower(RequiredScript) == "lib/tweak_data/weaponfactorytweakdata" then
-	if not ShaveHUD:getSetting({"INVENTORY", "BIGGER_BETTER_REPLACED"}, true) then
-		return
+	if ShaveHUD:getSetting({"Misc", "AKIMBO_ANIMATIONS"}, true) then
+		Hooks:PostHook(WeaponFactoryTweakData, "init", "akimboanimfactory_init", function(self)
+			self.wpn_fps_pis_x_judge.override.wpn_fps_pis_judge_body_standard = {}
+			self.wpn_fps_pis_x_judge.override.wpn_fps_pis_judge_body_modern = {}
+			
+			self.wpn_fps_pis_x_rage.override.wpn_fps_pis_rage_body_standard = {}
+			self.wpn_fps_pis_x_rage.override.wpn_fps_pis_rage_body_smooth = {}
+			
+			self.wpn_fps_pis_x_2006m.override.wpn_fps_pis_2006m_body_standard = {}
+			self.wpn_fps_pis_x_2006m.override.wpn_fps_pis_2006m_m_standard = {}
+			
+			self.wpn_fps_smg_x_m1928.override.wpn_fps_smg_thompson_drummag = {animations = {}}
+		end)
 	end
 
-	local sos_init_silencers_original = WeaponFactoryTweakData._init_silencers
-	function WeaponFactoryTweakData:_init_silencers()
-		sos_init_silencers_original(self)
-		
-		-- SpecOps Suppressed Barrel
-		self.parts.wpn_fps_upg_ns_ass_smg_large.unit = "units/pd2_dlc_dec5/weapons/wpn_fps_smg_mp7_pts/wpn_fps_smg_mp7_b_suppressed"
-		self.parts.wpn_fps_upg_ns_ass_smg_large.third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_smg_mp7_pts/wpn_third_smg_mp7_b_suppressed"
-		
-		-- Jungle Ninja Suppressor
-		-- self.parts.wpn_fps_upg_ns_ass_smg_large.unit = "units/pd2_dlc_butcher_mods/weapons/wpn_fps_upg_ns_pis_jungle/wpn_fps_upg_ns_pis_jungle"
-		-- self.parts.wpn_fps_upg_ns_ass_smg_large.third_unit = "units/pd2_dlc_butcher_mods/weapons/wpn_third_upg_ns_pis_jungle/wpn_third_upg_ns_pis_jungle"
+	if ShaveHUD:getSetting({"INVENTORY", "BIGGER_BETTER_REPLACED"}, true) then
+		local sos_init_silencers_original = WeaponFactoryTweakData._init_silencers
+		function WeaponFactoryTweakData:_init_silencers()
+			sos_init_silencers_original(self)
+			
+			-- SpecOps Suppressed Barrel
+			self.parts.wpn_fps_upg_ns_ass_smg_large.unit = "units/pd2_dlc_dec5/weapons/wpn_fps_smg_mp7_pts/wpn_fps_smg_mp7_b_suppressed"
+			self.parts.wpn_fps_upg_ns_ass_smg_large.third_unit = "units/pd2_dlc_dec5/weapons/wpn_third_smg_mp7_pts/wpn_third_smg_mp7_b_suppressed"
+			
+			-- Jungle Ninja Suppressor
+			-- self.parts.wpn_fps_upg_ns_ass_smg_large.unit = "units/pd2_dlc_butcher_mods/weapons/wpn_fps_upg_ns_pis_jungle/wpn_fps_upg_ns_pis_jungle"
+			-- self.parts.wpn_fps_upg_ns_ass_smg_large.third_unit = "units/pd2_dlc_butcher_mods/weapons/wpn_third_upg_ns_pis_jungle/wpn_third_upg_ns_pis_jungle"
+		end
 	end
 elseif string.lower(RequiredScript) == "lib/tweak_data/timespeedeffecttweakdata" then
 	local init_original = TimeSpeedEffectTweakData.init
@@ -193,6 +206,185 @@ elseif string.lower(RequiredScript) == "lib/units/cameras/fpcameraplayerbase" th
 		end
 	end
 elseif string.lower(RequiredScript) == "lib/tweak_data/weapontweakdata" then
+	if ShaveHUD:getSetting({"Misc", "AKIMBO_ANIMATIONS"}, true) then
+		Hooks:PostHook(WeaponTweakData, "init", "akimboanim_init", function(self)
+			self.x_judge.weapon_hold = "x_chinchilla"
+			self.x_judge.animations.reload_name_id = "x_chinchilla"
+			self.x_judge.animations.second_gun_versions = self.x_judge.animations.second_gun_versions or {}
+			self.x_judge.animations.second_gun_versions.reload = "reload"
+			self.x_judge.sounds.reload = {
+				wp_chinchilla_cylinder_out = "wp_rbull_drum_open",
+				wp_chinchilla_eject_shells = "wp_rbull_shells_out",
+				wp_chinchilla_insert = "wp_rbull_shells_in",
+				wp_chinchilla_cylinder_in = "wp_rbull_drum_close"
+			}
+			self.x_rage.weapon_hold = "x_chinchilla"
+			self.x_rage.animations.reload_name_id = "x_chinchilla"
+			self.x_rage.animations.second_gun_versions = self.x_rage.animations.second_gun_versions or {}
+			self.x_rage.animations.second_gun_versions.reload = "reload"
+			self.x_rage.sounds.magazine_empty = nil
+			self.x_rage.sounds.reload = {
+				wp_chinchilla_cylinder_out = "wp_rbull_drum_open",
+				wp_chinchilla_eject_shells = "wp_rbull_shells_out",
+				wp_chinchilla_insert = "wp_rbull_shells_in",
+				wp_chinchilla_cylinder_in = "wp_rbull_drum_close"
+			}
+			self.x_2006m.weapon_hold = "x_chinchilla"
+			self.x_2006m.animations.reload_name_id = "x_chinchilla"
+			self.x_2006m.sounds.magazine_empty = nil
+			self.x_2006m.hidden_parts = {
+				magazine = {"g_loader_lod0"}
+			}
+			self.x_2006m.sounds.reload = {
+				wp_chinchilla_cylinder_out = "wp_mateba_open_barrel",
+				wp_chinchilla_eject_shells = "wp_mateba_empty_barrel",
+				wp_chinchilla_insert = "wp_mateba_put_in_bullets",
+				wp_chinchilla_twist = "wp_mateba_speedloader_lid",
+				wp_rbull_shell_hit_ground = "wp_mateba_shell_hit_ground",
+				wp_chinchilla_cylinder_in = "wp_mateba_close_barrel"
+			}
+			self.x_coal.weapon_hold = "x_akmsu"
+			self.x_coal.animations.reload_name_id = "x_akmsu"
+			self.x_coal.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_coal_take_new_mag",
+				wp_akmsu_x_clip_slide_out = "wp_coal_mag_out_back",
+				wp_akmsu_x_clip_slide_in = "wp_coal_mag_in_front",	
+				wp_akmsu_x_clip_in_contact = "wp_coal_mag_in_back",
+				wp_akmsu_x_lever_pull = "wp_coal_pull_lever",
+				wp_akmsu_x_lever_release = "wp_coal_release_lever"
+			}
+			self.x_rota.weapon_hold = "x_akmsu"
+			self.x_rota.animations.reload_name_id = "x_basset"
+			self.x_rota.sounds.reload = {
+				wp_foley_generic_clip_take_new = "wp_rota_x_rotate_mag",
+				basset_x_mag_out = "wp_rota_x_slide_out",
+				basset_x_mag_in = "wp_rota_x_slide_in",	
+				basset_x_lever_release = "wp_rota_x_grab_lift"
+			}
+			self.x_sparrow.sounds.reload = {
+				wp_g17_clip_slide_out = "wp_sparrow_mag_out",
+				wp_g17_clip_slide_in = "wp_sparrow_mag_in",
+				wp_g17_lever_release = "wp_sparrow_cock"
+			}
+			self.x_pl14.sounds.reload = {
+				wp_g17_clip_slide_out = "wp_sparrow_mag_out",
+				wp_g17_clip_slide_in = "wp_sparrow_mag_in",
+				wp_g17_lever_release = "wp_sparrow_cock"
+			}
+			self.x_hs2000.sounds.reload = {
+				wp_g17_clip_slide_out = "wp_usp_clip_out",
+				wp_g17_clip_slide_in = "wp_usp_clip_slide_in"
+			}
+			self.x_1911.sounds.reload = {
+				wp_g17_clip_slide_out = "wp_usp_clip_out",
+				wp_g17_clip_slide_in = "wp_usp_clip_slide_in"
+			}
+			self.x_p226.sounds.reload = {
+				wp_g17_clip_slide_out = "wp_usp_clip_out",
+				wp_g17_clip_slide_in = "wp_usp_clip_slide_in"
+			}
+			self.x_usp.sounds.reload = {
+				wp_g17_clip_slide_out = "wp_usp_clip_out",
+				wp_g17_clip_slide_in = "wp_usp_clip_slide_in"
+			}
+			self.x_packrat.sounds.reload = {
+				wp_g17_clip_slide_out = "wp_packrat_mag_throw",
+				wp_g17_clip_slide_in = "wp_packrat_mag_in",
+				wp_g17_clip_grab = "wp_packrat_mag_contact",
+				wp_g17_lever_release = "wp_packrat_slide_release"
+			}
+			self.x_hajk.sounds.reload = {
+				wp_akmsu_x_clip_slide_out = "hajk_throw_mag",
+				wp_akmsu_x_clip_slide_in = "hajk_push_in_mag",	
+				wp_akmsu_x_clip_in_contact = "hajk_mag_contact",
+				wp_akmsu_x_lever_pull = "hajk_pull_lever",
+				wp_akmsu_x_lever_release = "hajk_release_lever"
+			}
+			self.x_mac10.sounds.reload = {
+				wp_akmsu_x_clip_slide_out = "wp_mac10_clip_slide_out",
+				wp_akmsu_x_clip_slide_in = "wp_mac10_clip_slide_in",	
+				wp_akmsu_x_clip_in_contact = "wp_mac10_clip_in_contact",
+				wp_akmsu_x_lever_pull = "wp_mac10_lever_pull",
+				wp_akmsu_x_lever_release = "wp_mac10_lever_release"
+			}
+			self.x_cobray.sounds.reload = {
+				wp_akmsu_x_clip_slide_out = "wp_mac10_clip_slide_out",
+				wp_akmsu_x_clip_slide_in = "wp_mac10_clip_slide_in",	
+				wp_akmsu_x_clip_in_contact = "wp_mac10_clip_in_contact",
+				wp_akmsu_x_lever_pull = "wp_cobray_lever_pull",
+				wp_akmsu_x_lever_release = "wp_cobray_lever_release"
+			}
+			self.x_scorpion.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_scorpion_clip_grab",
+				wp_akmsu_x_clip_slide_out = "wp_scorpion_clip_slide_out",
+				wp_akmsu_x_clip_slide_in = "wp_scorpion_clip_slide_in",	
+				wp_akmsu_x_clip_in_contact = "wp_scorpion_clip_in_contact",
+				wp_akmsu_x_lever_pull = "wp_scorpion_lever_pull",
+				wp_akmsu_x_lever_release = "wp_scorpion_lever_release"
+			}
+			self.x_baka.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_baka_take_new",
+				wp_akmsu_x_clip_slide_out = "wp_baka_mag_slide_out",
+				wp_akmsu_x_clip_slide_in = "wp_baka_mag_slide_in",	
+				wp_akmsu_x_clip_in_contact = "",
+				wp_akmsu_x_lever_pull = "wp_baka_lever_pull",
+				wp_akmsu_x_lever_release = "wp_baka_lever_release"
+			}
+			self.x_mp9.sounds.reload = {
+				wp_akmsu_x_clip_slide_out = "wp_mac10_clip_slide_out",
+				wp_akmsu_x_clip_slide_in = "wp_mac10_clip_slide_in",	
+				wp_akmsu_x_clip_in_contact = "wp_mac10_clip_in_contact",
+				wp_akmsu_x_lever_pull = "wp_mac10_lever_pull",
+				wp_akmsu_x_lever_release = "wp_mac10_lever_release"
+			}
+			self.x_olympic.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_m4_clip_take_new",
+				wp_akmsu_x_clip_slide_out = "wp_m4_clip_grab_out",
+				wp_akmsu_x_clip_slide_in = "wp_m4_clip_slide_in",	
+				wp_akmsu_x_clip_in_contact = "wp_m4_clip_in_contact",
+				wp_akmsu_x_lever_pull = "wp_m4_lever_pull_in",
+				wp_akmsu_x_lever_release = "wp_m4_lever_release"
+			}
+			--Reload sounds weren't included in the akimbo soundbank :rage:
+			self.x_erma.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_erma_mag_grab_new",
+				wp_akmsu_x_clip_slide_out = "wp_erma_mag_out",
+				wp_akmsu_x_clip_slide_in = "wp_erma_mag_in",	
+				wp_akmsu_x_clip_in_contact = "wp_erma_mag_connect",
+				wp_akmsu_x_lever_pull = "wp_erma_slide_pull",
+				wp_akmsu_x_lever_release = "wp_erma_slide_release"
+			}
+			self.x_tec9.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_tec9_clip_take_new",
+				wp_akmsu_x_clip_slide_out = "wp_tec9_clip_slide_out",
+				wp_akmsu_x_clip_slide_in = "wp_tec9_clip_slide_in",	
+				wp_akmsu_x_clip_in_contact = "wp_tec9_clip_in_contact",
+				wp_akmsu_x_lever_pull = "wp_tec9_lever_pull",
+				wp_akmsu_x_lever_release = "wp_tec9_lever_release"
+			}
+			self.x_uzi.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_uzi_clip_take_new",
+				wp_akmsu_x_clip_slide_out = "wp_uzi_clip_slide_out",
+				wp_akmsu_x_clip_slide_in = "wp_uzi_clip_slide_in",	
+				wp_akmsu_x_clip_in_contact = "",
+				wp_akmsu_x_lever_pull = "wp_uzi_clip_lever_pull",
+				wp_akmsu_x_lever_release = "wp_uzi_clip_lever_release"
+			}
+			self.x_m45.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_m45_clip_take_new",
+				wp_akmsu_x_clip_slide_out = "wp_m45_clip_grab_out",
+				wp_akmsu_x_clip_slide_in = "wp_m45_clip_slide_in",	
+				wp_akmsu_x_clip_in_contact = "wp_m45_clip_in_contact",
+				wp_akmsu_x_lever_pull = "wp_m45_lever_pull",
+				wp_akmsu_x_lever_release = "wp_m45_lever_release"
+			}
+			self.x_mp7.sounds.reload = {
+				wp_akmsu_x_take_new = "wp_mp7_clip_take_new",
+				wp_akmsu_x_clip_slide_in = "wp_mp7_clip_slide_in"
+			}
+		end)
+	end
+
 	if ShaveHUD:getSetting({"Fixes", "THIRD_PERSON_RECOIL"}, true) then
 		Hooks:PostHook(WeaponTweakData, "init", "tpsmod_enable_anims", function(self)
 			local blacklist = {
@@ -412,6 +604,14 @@ elseif string.lower(RequiredScript) == "lib/managers/mission/elementspawnenemydu
 		end
 	end
 elseif string.lower(RequiredScript) == "lib/network/base/networkpeer" then
+	if ShaveHUD:getSetting({"CrewLoadout", "IDENTIFY_VR"}, true) then
+		Hooks:PreHook(NetworkPeer,"set_is_vr","idvr_setvr",function(self)
+			if not self._is_vr then --if using posthook or without this check, always outputs the message twice. I don't like that.
+				managers.chat:_receive_message(1,"[ID_VR]", tostring(self._name) .. " is using VR!", Color('29FFC9'))
+			end
+		end)
+	end
+
 	if ShaveHUD:getSetting({"CrewLoadout", "AUTOKICK_CHEAT_MODS"}, true) then
 		Hooks:PostHook(NetworkPeer, "set_ip_verified", "autokick_cheaters", function(self, state)
 			if not Network:is_server() then
@@ -516,7 +716,6 @@ elseif string.lower(RequiredScript) == "lib/units/beings/player/huskplayerdamage
             managers.game_play_central:sync_play_impact_flesh(hit_pos, attack_dir)
         end)
     end
-	
 	if ShaveHUD:getSetting({"Misc", "LADDER_IMPROVEMENTS"}, true) then
 		local orig_damage = PlayerDamage.damage_fall
 		function PlayerDamage:damage_fall(...)
@@ -553,93 +752,16 @@ elseif string.lower(RequiredScript) == "lib/utils/accelbyte/telemetry" then
 	end
 
 	local base_url = "http://localhost/"
+	local function get_geolocation() return end
+	local function get_total_playtime() return end
+	local function update_total_playtime(new_playtime) return end
+	local function send_telemetry(telemetry_body) return end
 
-    local function get_geolocation()
-        return
-    end
-
-    local function get_total_playtime()
-        return
-    end
-
-    local function update_total_playtime(new_playtime)
-        return
-    end
-
-    local function send_telemetry(telemetry_body)
-        return
-    end
-
-    local function send_telemetry(telemetry_body)
-        return
-    end
-
-    function Telemetry:init()
-        return
-    end
-    function Telemetry:update(t, dt)
-        return
-    end
-    function Telemetry:send_on_player_change_loadout(stats)
-        return
-    end
-    function Telemetry:send_on_player_economy_event(event_origin, currency, amount, transaction_type)
-        return
-    end
-    function Telemetry:on_start_heist(...)
-        return
-    end
-    function Telemetry:send_on_player_tutorial()
-        return
-    end
-    function Telemetry:on_end_heist()
-        return
-    end
-    function Telemetry:last_quickplay_room_id()
-        return
-    end
-    function Telemetry:send_on_player_logged_out()
-        return
-    end
-    function Telemetry:send_batch_immediately()
-        return
-    end
-    function Telemetry:send_telemetry_immediately(event_name, payload, event_namespace, callback)
-        return
-    end
-    function Telemetry:send_on_player_lobby_setting()
-        return
-    end
-    function Telemetry:send_on_player_heartbeat()
-        return
-    end
-    function Telemetry:send_on_player_heist_end()
-        return
-    end
-    function Telemetry:send_on_player_heist_start()
-        return
-    end
-    function Telemetry:enable(is_enable)
-        return false
-    end
-    function Telemetry:set_mission_payout(payout)
-        return
-    end
-    function Telemetry:on_login_screen_passed()
-        return
-    end
-    function Telemetry:send(event_name, payload, event_namespace)
-        return
-    end
-    function Telemetry:on_login()
-        return false
-    end
-    function Telemetry:send_on_heist_start()
-        return
-    end
-    function Telemetry:send_on_heist_end(end_reason)
-        return
-    end
+	local function function_empty() return end
+	local Telemetry = Telemetry
+	for k, _ in pairs(Telemetry) do
+		Telemetry[k] = function_empty
+	end
 elseif string.lower(RequiredScript) == "lib/tweak_data/playertweakdata" then
 	if not ShaveHUD:getSetting({"Misc", "NO_SWAY"}, true) then
 		return
@@ -958,6 +1080,22 @@ elseif string.lower(RequiredScript) == "lib/managers/hud/hudblackscreen" then
 			end)
 		end
 		self._blackscreen_panel:set_alpha(1)
+	end
+elseif string.lower(RequiredScript) == "lib/network/base/hostnetworksession" then
+	if ShaveHUD:getSetting({"CrewLoadout", "IDENTIFY_VR"}, true) then
+		Hooks:PostHook(HostNetworkSession, "on_peer_sync_complete", "host_informvr" , function(self, peer, peer_id)
+			if _G.IS_VR then
+				managers.chat:send_message( 1, managers.network:session():local_peer(), "I am using VR!")
+			end
+		end)
+	end
+elseif string.lower(RequiredScript) == "lib/network/base/clientnetworksession" then
+	if ShaveHUD:getSetting({"CrewLoadout", "IDENTIFY_VR"}, true) then
+		Hooks:PostHook(ClientNetworkSession,"on_peer_synched","client_informvr",function(self, peer_id, ...)
+			if _G.IS_VR then 
+				managers.chat:send_message( 1, managers.network:session():local_peer(), "I am using VR!" )
+			end
+		end)
 	end
 elseif string.lower(RequiredScript) == "lib/network/base/basenetworksession" then
 	if not ShaveHUD:getSetting({"Misc", "KICK_FRIEND"}, true) then
@@ -1482,7 +1620,6 @@ elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copinventory" then
 	if not ShaveHUD:getSetting({"Misc", "SHIELD_DESPAWN_TIMER"}, true) then
 		return
 	end
-
 	local this = {
 		min_value = 3,
 		max_value = 12
@@ -1512,4 +1649,47 @@ elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copinventory" then
 			end
 		end)
 	end
+elseif string.lower(RequiredScript) == "lib/units/weapons/newraycastweaponbase" then
+	if not ShaveHUD:getSetting({"Misc", "AKIMBO_ANIMATIONS"}, true) then
+		return
+	end
+	Hooks:PostHook(NewRaycastWeaponBase, "clbk_assembly_complete", "akimboanim_hideobject", function(self)
+		local hidden_data = tweak_data.weapon[self._name_id].hidden_parts
+	
+		if hidden_data then
+			for part_type, part_data in pairs(hidden_data) do
+				local part_list = managers.weapon_factory:get_parts_from_weapon_by_type_or_perk(part_type, self._factory_id, self._blueprint)
+	
+				for _, part_name in ipairs(part_list) do
+					local part = self._parts[part_name]
+					local objects = type(part_data) == "table" and (part_data[part_name] or part_data[1] and part_data) or true
+	
+					if objects then
+						if type(objects) == "table" then
+							for _, object_name in ipairs(objects) do
+								local object = part.unit:get_object(Idstring(object_name))
+	
+								if alive(object) then
+									object:set_visibility(false)
+	
+									if self._hidden_objects then
+										self._hidden_objects[part_name] = self._hidden_objects[part_name] or {}
+	
+										table.insert(self._hidden_objects[part_name], object_name)
+									end
+								end
+							end
+						else
+							part.unit:set_visible(false)
+							self:_set_part_temporary_visibility(part_name, false)
+	
+							if self._hidden_objects then
+								self._hidden_objects[part_name] = true
+							end
+						end
+					end
+				end
+			end
+		end
+	end)
 end

@@ -38,7 +38,8 @@ if string.lower(RequiredScript) == "lib/units/weapons/raycastweaponbase" then
 			["m134"] = true,
 			["mg42"] = true,
 			["shuno"] = true,
-			["system"] = true
+			["system"] = true,
+			["par"] = true
 		}
 
 		--Allows users/modders to easily edit this blacklist from outside of this mod
@@ -63,7 +64,6 @@ if string.lower(RequiredScript) == "lib/units/weapons/raycastweaponbase" then
 			--Weapons on this list will play their sound as normal
 			-- either due to being an unconventional weapon (saw, flamethrower, other saw, other flamethrower), or lacking a singlefire sound (minigun, mg42, other minigun).
 		--I could define this in the function but meh	
-			
 
 		--Check for if AFSF's fix code should apply to this particular weapon
 		function RaycastWeaponBase:_soundfix_should_play_normal()
@@ -77,6 +77,8 @@ if string.lower(RequiredScript) == "lib/units/weapons/raycastweaponbase" then
 			elseif AutoFireSoundFixBlacklist[name_id] then
 				--blacklisted sound
 				return true
+		--	elseif self:gadget_overrides_weapon_functions() then 
+		--		return true
 			elseif not self:weapon_tweak_data().sounds.fire_single then
 				--no singlefire sound; should play normal
 				return true
@@ -96,8 +98,8 @@ if string.lower(RequiredScript) == "lib/units/weapons/raycastweaponbase" then
 		--Play sounds here instead for fix-applicable weapons; or else if blacklisted, use original function and don't play the fixed single-fire sound
 		--U200: there goes AFSF2's compatibility with other mods
 		Hooks:PreHook(RaycastWeaponBase,"fire","autofiresoundfix2_raycastweaponbase_fire",function(self,...)
-			self._bullets_fired = 0
 			if not self:_soundfix_should_play_normal() then
+				self._bullets_fired = 0
 				self:play_tweak_data_sound(self:weapon_tweak_data().sounds.fire_single,"fire_single")
 			end
 		end)
@@ -299,4 +301,91 @@ elseif string.lower(RequiredScript) == "lib/tweak_data/crimespreetweakdata" then
 	Hooks:PostHook( CrimeSpreeTweakData, "init", "BLEH", function(self, tweak_data)
 		self.crash_causes_loss = false
 	end)
+elseif string.lower(RequiredScript) == "lib/units/enemies/cop/copmovement" then
+	if not ShaveHUD:getSetting({"Fixes", "MAG_DROP"}, true) then
+		return
+	end
+	function CopMovement:allow_dropped_magazines()
+		if managers.weapon_factory:use_thq_weapon_parts() then
+			return ShaveHUD:getSetting({"Fixes", "MAG_DROP"}, true)
+		else
+			return false
+		end
+	end
+	Hooks:PostHook(CopMovement, "action_request", "action_request_mag_fix", function(self)
+		if self._active_actions[3] and self._active_actions[3]:type() ~= "reload" and self._magazine_data and alive(self._magazine_data.unit) then
+			self._magazine_data.unit:set_slot(0)
+			self._magazine_data = nil
+			
+			local equipped_weapon = self._unit:inventory():equipped_unit()
+	
+			if alive(equipped_weapon) then
+				for part_id, part_data in pairs(equipped_weapon:base()._parts) do
+					local part = tweak_data.weapon.factory.parts[part_id]
+	
+					if part and part.type == "magazine" then
+						part_data.unit:set_visible(true)
+					end
+				end
+			end
+		end
+	end)
+elseif string.lower(RequiredScript) == "lib/units/beings/player/huskplayermovement" then
+	if not ShaveHUD:getSetting({"Fixes", "MAG_DROP"}, true) then
+		return
+	end
+	function HuskPlayerMovement:allow_dropped_magazines()
+		if managers.weapon_factory:use_thq_weapon_parts() then
+			return ShaveHUD:getSetting({"Fixes", "MAG_DROP"}, true)
+		else
+			return false
+		end
+	end
+	Hooks:PostHook(HuskPlayerMovement, "update", "husk_update_mag_fix", function(self)
+		if not self._ext_anim.reload and self._magazine_data and alive(self._magazine_data.unit) then
+			self._magazine_data.unit:set_slot(0)
+			self._magazine_data = nil
+			
+			local equipped_weapon = self._unit:inventory():equipped_unit()
+	
+			if alive(equipped_weapon) then
+				for part_id, part_data in pairs(equipped_weapon:base()._parts) do
+					local part = tweak_data.weapon.factory.parts[part_id]
+	
+					if part and part.type == "magazine" then
+						part_data.unit:set_visible(true)
+					end
+				end
+			end
+		end
+	end)
+elseif string.lower(RequiredScript) == "lib/managers/enemymanager" then
+	if not ShaveHUD:getSetting({"Fixes", "MAG_DROP"}, true) then
+		return
+	end
+	function EnemyManager:add_magazine(magazine, collision)
+		local max_magazines = math.round(ShaveHUD:getSetting({"Fixes", "MAG_DROP_LIMIT"}, 30)) or 30
+		self._magazines = self._magazines or {}
+	
+		table.insert(self._magazines, {
+			magazine,
+			collision
+		})
+	
+		if max_magazines < #self._magazines then
+			self:cleanup_magazines()
+		end
+	end
+	function EnemyManager:cleanup_magazines()
+		local max_magazines = math.round(ShaveHUD:getSetting({"Fixes", "MAG_DROP_LIMIT"}, 30)) or 30
+		for i = 1, #self._magazines - max_magazines, 1 do
+			for _, unit in ipairs(self._magazines[1]) do
+				if alive(unit) then
+					unit:set_slot(0)
+				end
+			end
+	
+			table.remove(self._magazines, 1)
+		end
+	end
 end

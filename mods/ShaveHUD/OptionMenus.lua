@@ -3409,32 +3409,23 @@ if ShaveHUD then
 				options = {
 					{
 						type = "toggle",
+						name_id = "shavehud_autokick_cheat_mods_title",
+						desc_id = "shavehud_autokick_cheat_mods_desc",
+						value = {"CrewLoadout", "AUTOKICK_CHEAT_MODS"},
+						visible_reqs = {}, enabled_reqs = {},
+					},
+					{
+						type = "toggle",
 						name_id = "shavehud_skin_hider_title",
 						desc_id = "shavehud_skin_hider_desc",
 						value = {"CrewLoadout", "SKIN_HIDER"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--[[ TO DO
 					{
 						type = "toggle",
 						name_id = "shavehud_identify_vr_title",
 						desc_id = "shavehud_identify_vr_desc",
 						value = {"CrewLoadout", "IDENTIFY_VR"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					{
-						type = "toggle",
-						name_id = "shavehud_peer_mod_display_title",
-						desc_id = "shavehud_peer_mod_display_desc",
-						value = {"CrewLoadout", "PEER_MOD_DISPLAY"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					]]--
-					{
-						type = "toggle",
-						name_id = "shavehud_autokick_cheat_mods_title",
-						desc_id = "shavehud_autokick_cheat_mods_desc",
-						value = {"CrewLoadout", "AUTOKICK_CHEAT_MODS"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
 					{
@@ -4279,6 +4270,23 @@ if ShaveHUD then
 					},
 					{
 						type = "toggle",
+						name_id = "shavehud_fix_mag_drop_title",
+						desc_id = "shavehud_fix_mag_drop_desc",
+						value = {"Fixes", "MAG_DROP"},
+						visible_reqs = {}, enabled_reqs = {},
+					},
+					{
+						type = "slider",
+						name_id = "shavehud_fix_mag_drop_limit_title",
+						desc_id = "shavehud_fix_mag_drop_limit_desc",
+						value = {"Fixes", "MAG_DROP_LIMIT"},
+						visible_reqs = {}, enabled_reqs = {},
+						min_value = 0,
+						max_value = 2048,
+						step_size = 1,
+					},
+					{
+						type = "toggle",
 						name_id = "shavehud_fix_stale_lobby_title",
 						desc_id = "shavehud_fix_stale_lobby_desc",
 						value = {"Fixes", "STALE_LOBBY"},
@@ -4342,7 +4350,6 @@ if ShaveHUD then
 						type = "divider",
 						size = 8,
 					},
-					--[[ TO DO
 					{
 						type = "toggle",
 						name_id = "shavehud_akimbo_animations_title",
@@ -4350,7 +4357,6 @@ if ShaveHUD then
 						value = {"Misc", "AKIMBO_ANIMATIONS"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--]]
 					{
 						type = "toggle",
 						name_id = "shavehud_badass_camera_title",
@@ -4414,15 +4420,6 @@ if ShaveHUD then
 						value = {"Misc", "KICK_FRIEND"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--[[ TO DO
-					{
-						type = "toggle",
-						name_id = "shavehud_force_start_title",
-						desc_id = "shavehud_force_start_desc",
-						value = {"Misc", "FORCE_START"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					]]--
 					{
 						type = "toggle",
 						name_id = "shavehud_hidden_dlc_title",
@@ -4451,15 +4448,6 @@ if ShaveHUD then
 						value = {"Misc", "LADDER_IMPROVEMENTS"},
 						visible_reqs = {}, enabled_reqs = {},
 					},
-					--[[ TO DO
-					{
-						type = "toggle",
-						name_id = "shavehud_mission_intros_title",
-						desc_id = "shavehud_mission_intros_desc",
-						value = {"Misc", "MISSION_INTROS"},
-						visible_reqs = {}, enabled_reqs = {},
-					},
-					--]]
 					{
 						type = "toggle",
 						name_id = "shavehud_mod_list_lite_title",

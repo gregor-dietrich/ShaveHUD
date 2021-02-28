@@ -8,3 +8,11 @@ guis\textures\pd2\hud_stealthmeter_bg.texture
 - ShaveHUD Assets exclusive:
 guis\textures\pd2\hud_health.texture (based on Simple Health Thresholds by Bedebao)
 guis\textures\pd2\hud_shield.texture
+- Slightly Exaggerated 3rd-Person Muzzleflashes
+effects\payday2\particles\weapons\*_auto.effect
+effects\payday2\particles\weapons\9mm_auto_silence.effect
+- Slightly Exaggerated FPS Muzzleflashes
+effects\payday2\particles\weapons\*_fps.effect
+- Slightly Exaggerated Weapon Tracers
+effects\particles\*
+effects\payday2\particles\weapons\streaks\long_streak.effect
