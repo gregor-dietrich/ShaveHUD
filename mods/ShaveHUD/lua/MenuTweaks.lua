@@ -1305,7 +1305,7 @@ elseif string.lower(RequiredScript) == "lib/managers/menu/renderers/menunodeskil
 		end
 	end
 elseif string.lower(RequiredScript) == "lib/managers/chatmanager" then
-	dofile(ModPath .. "lua/utils/NumpadEnter.lua")
+	dofile(ModPath .. "lua/Utils/NumpadEnter.lua")
 	local key_release_actual = ChatGui.key_release
 	function ChatGui:key_release(...)
 		key_release_actual(self, unpack(NumpadEnterConfirm_RemapNumpadEnter(...)))

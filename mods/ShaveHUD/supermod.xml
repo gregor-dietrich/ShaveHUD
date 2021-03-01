@@ -350,7 +350,6 @@
 					<group :hook_id="newraycastweaponbase">
 						<post :script_path="WeaponGadgets.lua"/>
 						<post :script_path="BurstFire.lua"/>
-						<post :script_path="Scripts.lua"/>
 					</group>
 				</group>
 
