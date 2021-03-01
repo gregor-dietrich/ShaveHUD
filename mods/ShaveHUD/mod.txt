@@ -3,7 +3,7 @@
 	"description": "This is a Mod Collection of HUD altering scripts, as well as quality of life changes to the game and its menus.                 \n\nSome of the included scripts are: \n- CustomHUD, HUDList, KillCounter, Press2Hold & WeaponGadgets,\n   made by Seven\n- TabStats + NumericSuspicion, by friendlyfire\n- Enemy Healthbar, by Undeadsewer\n- DrivingHUD, by ViciousWalrus, rewritten by Kamikaze94\n- WolfHUD, made by Kamikaze94\n- many many more...\n\nFor a full list of included mods, go to the GitHUB repository, linked as contact.\n\nLocalizations: \n- English made by me\n- German made by me\n- Russian made by chrom[K]a, Magic3000 & MEXAHOTABOP\n- Korean made by Я!zu\n- Spanish made by papydeath95\n- Chinese made by zhongfly\n- French made by EliseMRX (La Mule).",
 	"author": "Takku",
 	"contact": "https://github.com/gregor-dietrich/ShaveHUD",
-	"version": "3.2 (Ultimate Unicorn)",
+	"version": "3.3 (Vertical Velociraptor)",
 	"priority": 1,
 	"blt_version": 2,
 	"supermod_definition": "supermod.xml",

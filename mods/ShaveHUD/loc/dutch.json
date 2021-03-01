@@ -1053,5 +1053,11 @@
     "shavehud_vehicle_fov_value_title": "Override Value",
     "shavehud_vehicle_fov_value_desc": "Set FOV for all vehicles to this",
 	"shavehud_fix_third_person_recoil_title": "Third Person Recoil",
-	"shavehud_fix_third_person_recoil_desc": "Enable firing/recoil animations for most weapons in third person"
+	"shavehud_fix_third_person_recoil_desc": "Enable firing/recoil animations for most weapons in third person",
+	"shavehud_fix_mag_drop_title": "Mag Drop Fixes",
+	"shavehud_fix_mag_drop_desc": "Interrupted reloads no longer cause magazines to be stuck in a player's hands or disappear from the gun.",
+	"shavehud_fix_mag_drop_limit_title": "Dropped Magazine Limit",
+	"shavehud_fix_mag_drop_limit_desc": "Limit dropped magazines in the world",
+	"shavehud_identify_vr_title": "Identify VR Players",
+	"shavehud_identify_vr_desc": "Show in chat when someone else is using VR and announce in chat that you're using VR (if applicable)."
 }
