@@ -2,8 +2,6 @@
 Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 different authors.
 
 # Included Mods
-- **Akimbo Animation Tweaks** by Zdann
-	- https://modwork.shop/22472
 - **Akimbo Firemode Toggle** by Llamageddon
 	- https://modwork.shop/20268
 - **Auto-Discard Parachute** by Snh20
