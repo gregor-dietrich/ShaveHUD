@@ -1,4 +1,5 @@
 # ShaveHUD
+(discontinued)
 Mod Collection for Payday 2. Contains roughly 130 mods made by about 50 different authors.
 
 # Included Mods
